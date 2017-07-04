@@ -61,7 +61,7 @@ class LSM6DS33():
          b = len(mat) == 1000
          sleep(0.05)
      m = DataFrame(mat)
-     self.zeroGyro = m.mean.as_matrix()
+     self.zeroGyro = m.mean().as_matrix()
      self.setupGyroSTD = m.std().as_matrix()
 
  def setupAccel(self):
