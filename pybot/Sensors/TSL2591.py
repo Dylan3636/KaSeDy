@@ -180,7 +180,7 @@ class TSL2591(object):
 
 if __name__ == '__main__':
 
-    tsl = TSl2591()  # initialize
+    tsl = TSL2591()  # initialize
     full, ir = tsl.get_full_luminosity()  # read raw values (full spectrum and ir spectrum)
     lux = tsl.calculate_lux(full, ir)  # convert raw values to lux
     print (lux, full, ir)
