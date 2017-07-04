@@ -1,6 +1,7 @@
-import KalmanFilter
-import LSM6DS33
 from time import sleep
+
+import KalmanFilter
+from Sensors import LSM6DS33
 
 
 def main():
