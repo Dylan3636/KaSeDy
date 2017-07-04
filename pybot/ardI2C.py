@@ -5,7 +5,7 @@ class Arduino():
         self.address = address
         self.bus = smbus.SMBus(1)
     def talk(self,message):
-        self.bus.write_byte(self.address,message )
+        self.bus.write_byte(self.address,0x00,message )
 
     def listen(self):
         return self.bus.read_byte(self.address)

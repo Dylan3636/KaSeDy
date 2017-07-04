@@ -14,8 +14,10 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println(Wire.available());
-  delay(1000);
+//  if(Wire.available()){
+//    Serial.println();
+//    delay(1000);
+//  }
 }
 
 void receiveData(int byteCount){
