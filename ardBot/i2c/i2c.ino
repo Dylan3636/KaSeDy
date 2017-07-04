@@ -1,6 +1,8 @@
 #include <Wire.h>
 
 #define SLAVE_ADDRESS 0x04
+#define GO_ADDRESS 0x00
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
@@ -20,10 +22,13 @@ void loop() {
 //  }
 }
 
-void receiveData(int byteCount){
+void receiveData(int byteCouent){
   while(Wire.available()){
+    int internal_addr = Wire.read();
     int number = Wire.read();
-    Serial.print("data received: ");
+    Serial.print("data received from ");
+    Serial.print(internal_addr);
+    Serial.print(": ");
     Serial.println(number);
   }
 }
