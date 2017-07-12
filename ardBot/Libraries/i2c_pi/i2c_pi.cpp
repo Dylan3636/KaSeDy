@@ -37,6 +37,10 @@ bool i2c_pi::get_on(){
 int * i2c_pi::get_data(){
     return data;
 }
+
+int i2c_pi::get_operation(){
+    return operation;
+}
 //i2c_pi_with_arg
 i2c_pi_with_arg::i2c_pi_with_arg(int addr){
      SLAVE_ADDRESSS = addr;
