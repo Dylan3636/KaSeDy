@@ -1,7 +1,7 @@
 #ifndef _I2C_PI_H_
 #define _I2C_PI_H_
 
-#include <wire.h>
+#include <Wire.h>
 
 class i2c_pi{
 private:
@@ -12,8 +12,8 @@ private:
 public:
     i2c_pi();
     ~i2c_pi();
-    void receive_data(int byte_count);
-    void send_data(int number);
+    //void receive_data(int byte_count);
+    //void send_data(int number);
     bool get_on();
     int * get_data();
     int get_operation();

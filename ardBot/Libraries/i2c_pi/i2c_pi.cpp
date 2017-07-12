@@ -3,8 +3,8 @@
 //i2c_pi
 i2c_pi::i2c_pi(){
      Wire.begin(SLAVE_ADDRESSS);
-        Wire.onReceive(receive_data);
-        Wire.onRequest(send_data);
+     Wire.onReceive(receive_data);
+     Wire.onRequest(send_data);
 }
 
 i2c_pi::~i2c_pi(){
@@ -14,7 +14,7 @@ i2c_pi::~i2c_pi(){
     }
 }
 
-void i2c_pi::receive_data(int byte_count){
+void receive_data(int byte_count){
     if(data !=  nullptr){
         delete data;
         data = nullptr;
@@ -31,12 +31,12 @@ void i2c_pi::receive_data(int byte_count){
         int i = 0;
         while(Wire.available){
             if(i <= byte_count)
-                data[i++] = dataWire.read());
+                data[i++] = dataWire.read();
         }
     }
 }
 
-void i2c_pi::send_data(int number){
+void send_data(int number){
 
 }
 
