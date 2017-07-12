@@ -1,8 +1,8 @@
 #ifndef _I2C_PI_H_
 #define _I2C_PI_H_
 
-#include <wire.h>
-#include <vector>
+#include <Wire.h>
+#include <stl_vector.h>
 
 class i2c_pi{
 private:

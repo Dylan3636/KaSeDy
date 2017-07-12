@@ -3,6 +3,7 @@
 #include <time.h>
 #include <PID.h>
 #include <i2c_pi.h>
+#include <Array.h>
 
 AF_DCMotor m1(1);
 AF_DCMotor m2(2);
