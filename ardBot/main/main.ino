@@ -19,12 +19,12 @@ unsigned int sensorValues[NUM_SENSORS];
 
 const float gains[] = {1.0,1.0,1.0};
 PID pidL(m1,'L',qtra,gains);
+i2c_pi pi= i2c_pi();
+bool on = false;
 
 void setup() {
-    i2c_pi pi();
-    bool on = false;
     while(!on){
-      bool on = pi.get_on();
+      on = pi.get_on();
       delay(50);
     }
     
@@ -94,7 +94,7 @@ void loop() {
   while(on == false){
     bool on = pi.get_on();
   }
-  int data[] = pi.get_data();
+  int* data = pi.get_data();
   if(!(data==null)){
     int op = pi.get_operation()
     if(op==0x01){
