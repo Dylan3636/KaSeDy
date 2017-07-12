@@ -7,6 +7,7 @@ i2c_pi::i2c_pi(){
      Wire.onRequest(send_data);
 }
 
+
 i2c_pi::~i2c_pi(){
      if(data !=  nullptr){
         delete data;
@@ -23,15 +24,15 @@ void receive_data(int byte_count){
     operation = Wire.read(); // internal address read from Wire
 
     if (operation == 0x00)
-        on = Wire.read;          //Turn Arduino on/off
+        on = Wire.read()==1;          //Turn Arduino on/off
     else{
         int pos = (sizeof( data ) / sizeof( data[0] ));
        // if(pos <= byte_count)
        //    data[pos] = operation;
         int i = 0;
-        while(Wire.available){
+        while(Wire.available()){
             if(i <= byte_count)
-                data[i++] = dataWire.read();
+                data[i++] = Wire.read();
         }
     }
 }

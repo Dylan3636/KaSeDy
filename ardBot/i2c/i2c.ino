@@ -22,9 +22,9 @@ void loop() {
 //  }
 }
 
-void receiveData(int byteCouent){
-  while(Wire.available()){
+void receiveData(int byteCount){
     int internal_addr = Wire.read();
+  while(Wire.available()){
     int number = Wire.read();
     Serial.print("data received from ");
     Serial.print(internal_addr);
@@ -36,4 +36,5 @@ void receiveData(int byteCouent){
 void sendData(int number){
   Wire.write(number);
 }
+
 
