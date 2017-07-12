@@ -9,7 +9,7 @@ i2c_pi::i2c_pi(){
 
 void i2c_pi::receive_data(int byte_count){
     data = nullptr;
-    data = new int[byte_count];
+    data = int[byte_count];
     int operation = Wire.read(); // internal address read from Wire
 
     if (operation == 0x00)
