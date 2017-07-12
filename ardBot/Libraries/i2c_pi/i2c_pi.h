@@ -12,8 +12,8 @@ private:
     int * data = nullptr;
 public:
     i2c_pi();
-    void receive_data(int byte_count);
-    void send_data(int number);
+    static void receive_data(int byte_count);
+    static void send_data(int number);
     bool get_on();
     int * get_data();
     int get_operation();

@@ -17,7 +17,7 @@ QTRSensorsAnalog qtra((unsigned char[]) {0, 1, 2, 3, 4},
   NUM_SENSORS, NUM_SAMPLES_PER_SENSOR, EMITTER_PIN);
 unsigned int sensorValues[NUM_SENSORS];
 
-const float gains[] = {1.0,1.0,1.0};
+float gains[] = {1.0,1.0,1.0};
 PID pidL(m1,'L',qtra,gains);
 i2c_pi pi= i2c_pi();
 bool on = false;
@@ -95,10 +95,13 @@ void loop() {
     bool on = pi.get_on();
   }
   int* data = pi.get_data();
-  if(!(data==null)){
-    int op = pi.get_operation()
+  
+  if((data!=nullptr)){
+    int op = pi.get_operation();
     if(op==0x01){
-      gains = data;
+      for(int i = 0; i < 3; i++){
+        gains[i] = data[i];
+      }
     }
   }
   unsigned int position = qtra.readLine(sensorValues);
