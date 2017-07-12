@@ -24,8 +24,8 @@ void setup() {
     i2c_pi pi();
     bool on = false;
     while(!on){
-      on = pi.get_on()
-      delay(50)
+      bool on = pi.get_on();
+      delay(50);
     }
     
     Serial.begin(9600);
@@ -92,11 +92,11 @@ void setup() {
 
 void loop() {
   while(on == false){
-    on = pi.get_on();
+    bool on = pi.get_on();
   }
-  data = pi.get_data();
+  int data[] = pi.get_data();
   if(!(data==null)){
-    op = pi.get_operation()
+    int op = pi.get_operation()
     if(op==0x01){
       gains = data;
     }
