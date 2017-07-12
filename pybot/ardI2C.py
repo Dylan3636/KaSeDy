@@ -12,7 +12,7 @@ class Arduino():
 def main():
     ard = Arduino()
     while True:
-        ard.talk(1)
+        ard.talk([1,2])
         time.sleep(0.5)
 if __name__ == '__main__':
     main()
