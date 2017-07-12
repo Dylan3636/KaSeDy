@@ -10,16 +10,18 @@ i2c_pi::i2c_pi(){
 void i2c_pi::receive_data(int byte_count){
     data = nullptr;
     data = int[byte_count];
-    int operation = Wire.read(); // internal address read from Wire
+    operation = Wire.read(); // internal address read from Wire
 
     if (operation == 0x00)
         on = Wire.read;          //Turn Arduino on/off
     else{
         int pos = (sizeof( data ) / sizeof( data[0] ));
-        if(pos < = byte_count)
-            data[pos] = operation;
+       // if(pos <= byte_count)
+       //    data[pos] = operation;
+        int i = 0;
         while(Wire.available){
-            dataWire.read());
+            if(i <= byte_count)
+                data[i++] = dataWire.read());
         }
     }
 }
@@ -28,11 +30,11 @@ void i2c_pi::send_data(int number){
 
 }
 
-bool i2c_pi::on(){
+bool i2c_pi::get_on(){
     return on;
 }
 
-int * i2c_pi::data(){
+int * i2c_pi::get_data(){
     return data;
 }
 //i2c_pi_with_arg
