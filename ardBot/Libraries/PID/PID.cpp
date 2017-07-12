@@ -15,7 +15,7 @@ int PID::update(unsigned int sensorValues[]){
       t=t2;
       int val =0;
       if (motorType == 'L'){
-        val = sensorValues[4];
+        val = sensorValues[3];
       }
       else{
         val = sensorValues[2];

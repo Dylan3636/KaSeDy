@@ -2,17 +2,18 @@
 #include <AFMotor.h>
 #include <time.h>
 #include <PID.h>
+#include <i2c_pi.h>
 
 AF_DCMotor m1(1);
 AF_DCMotor m2(2);
 
 
-#define NUM_SENSORS             5  // number of sensors used
+#define NUM_SENSORS             4  // number of sensors used
 #define NUM_SAMPLES_PER_SENSOR  4  // average 4 analog samples per sensor reading
 #define EMITTER_PIN             QTR_NO_EMITTER_PIN // emitter is controlled by digital pin 2
 
 
-QTRSensorsAnalog qtra((unsigned char[]) {0, 1, 2, 3, 4, 5}, 
+QTRSensorsAnalog qtra((unsigned char[]) {0, 1, 2, 3, 4}, 
   NUM_SENSORS, NUM_SAMPLES_PER_SENSOR, EMITTER_PIN);
 unsigned int sensorValues[NUM_SENSORS];
 
@@ -20,11 +21,13 @@ const float gains[] = {1.0,1.0,1.0};
 PID pidL(m1,'L',qtra,gains);
 
 void setup() {
-    delay(500);
-    int val = 0;
-    while (val==0){
-      val = Serial.read();
+    i2c_pi pi();
+    on = false
+    while(!on){
+      on = pi.on()
+      delay(50)
     }
+    
     Serial.begin(9600);
     pinMode(13, OUTPUT);
     digitalWrite(13, HIGH);
@@ -87,7 +90,19 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  while(on == false){
+    on = pi.on();
+  }
+  data = pi.data();
+  if(!data.empty()){
+    op = data.pop_back()
+    if(op==0x01){
+      int i = 0;
+      while(!data.empty()){
+        gains[i] = data.pop_back();
+      }
+    }
+  }
   unsigned int position = qtra.readLine(sensorValues);
  for (unsigned char i = 0; i < NUM_SENSORS; i++)
   {
