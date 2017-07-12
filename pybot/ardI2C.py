@@ -5,14 +5,14 @@ class Arduino():
         self.address = address
         self.bus = smbus.SMBus(1)
     def talk(self,message):
-        self.bus.write_byte_data(self.address,0x00,message )
+        self.bus.write_block_data(self.address,0x00,message )
 
     def listen(self):
         return self.bus.read_byte(self.address)
 def main():
     ard = Arduino()
     while True:
-        ard.talk(1)
+        ard.talk([1,2])
         time.sleep(0.5)
 if __name__ == '__main__':
     main()
