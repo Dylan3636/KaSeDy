@@ -1,20 +1,20 @@
 #ifndef _I2C_PI_H_
 #define _I2C_PI_H_
 
+
 #include <Wire.h>
-#include <stl_vector.h>
 
 class i2c_pi{
 private:
     bool on = false;
     int SLAVE_ADDRESSS = 0x04;
-    std::vector data<int>;
+    int * data = nullptr;
 public:
     i2c_pi();
     void receive_data(int byte_count);
     void send_data(int number);
     bool on();
-    std::vector<int> data();
+    int * data;
 
 };
 
@@ -22,7 +22,7 @@ class i2c_pi_with_arg: public i2c_pi{
 private:
     bool on = false;
     int SLAVE_ADDRESSS = 0x04;
-    std::vector data<int>;
+    int * data =  nullptr;
 public:
     i2c_pi_with_arg(int addr);
 };

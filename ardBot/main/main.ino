@@ -3,7 +3,6 @@
 #include <time.h>
 #include <PID.h>
 #include <i2c_pi.h>
-#include <Array.h>
 
 AF_DCMotor m1(1);
 AF_DCMotor m2(2);
@@ -23,9 +22,9 @@ PID pidL(m1,'L',qtra,gains);
 
 void setup() {
     i2c_pi pi();
-    on = false
+    bool on = false;
     while(!on){
-      on = pi.on()
+      on = pi.get_on()
       delay(50)
     }
     
@@ -87,21 +86,19 @@ void setup() {
     
 
     digitalWrite(13, LOW);
+    
 
 }
 
 void loop() {
   while(on == false){
-    on = pi.on();
+    on = pi.get_on();
   }
-  data = pi.data();
-  if(!data.empty()){
-    op = data.pop_back()
+  data = pi.get_data();
+  if(!(data==null)){
+    op = pi.get_operation()
     if(op==0x01){
-      int i = 0;
-      while(!data.empty()){
-        gains[i] = data.pop_back();
-      }
+      gains = data;
     }
   }
   unsigned int position = qtra.readLine(sensorValues);
