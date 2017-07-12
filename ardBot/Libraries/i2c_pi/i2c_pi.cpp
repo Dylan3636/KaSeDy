@@ -7,9 +7,20 @@ i2c_pi::i2c_pi(){
         Wire.onRequest(send_data);
 }
 
-static void i2c_pi::receive_data(int byte_count){
-    data = nullptr;
-    data = int[byte_count];
+
+i2c_pi::~i2c_pi(){
+     if(data !=  nullptr){
+        delete data;
+        data = nullptr;
+    }
+}
+
+void i2c_pi::receive_data(int byte_count){
+    if(data !=  nullptr){
+        delete data;
+        data = nullptr;
+    }
+    data = new int[byte_count];
     operation = Wire.read(); // internal address read from Wire
 
     if (operation == 0x00)
@@ -26,7 +37,7 @@ static void i2c_pi::receive_data(int byte_count){
     }
 }
 
-static void i2c_pi::send_data(int number){
+void i2c_pi::send_data(int number){
 
 }
 
