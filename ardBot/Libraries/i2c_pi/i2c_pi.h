@@ -1,8 +1,7 @@
 #ifndef _I2C_PI_H_
 #define _I2C_PI_H_
 
-
-#include <Wire.h>
+#include <wire.h>
 
 class i2c_pi{
 private:
@@ -12,6 +11,7 @@ private:
     int * data = nullptr;
 public:
     i2c_pi();
+    ~i2c_pi();
     void receive_data(int byte_count);
     void send_data(int number);
     bool get_on();
