@@ -6,9 +6,10 @@ exit = 0
 
 while(exit == 0):
     #value = raw_input('Enter PID gains (q to quit): ')
-    click.echo()
-    if value == 'q':
+    click.echo(message='Direct me! (Press q to quit.)')
+    c=click.getchar()
+    print 'here: '+c
+    if c == 'q':
         exit = 1
     else:
-        values = map(long, value.split(' '))
-        print values
+        print c
