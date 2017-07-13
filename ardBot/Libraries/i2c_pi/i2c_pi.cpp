@@ -1,5 +1,7 @@
 #include "i2c_pi.h"
 
+
+
 //i2c_pi
 i2c_pi::i2c_pi(){
      Wire.begin(SLAVE_ADDRESSS);
@@ -15,42 +17,26 @@ i2c_pi::~i2c_pi(){
     }
 }
 
-void i2c_pi::receive_data(int byte_count){
-    if(data !=  nullptr){
-        delete data;
-        data = nullptr;
-    }
-    data = new int[byte_count];
-    operation = Wire.read(); // internal address read from Wire
 
-    if (operation == 0x00)
-        on = Wire.read()==1;          //Turn Arduino on/off
-    else{
-        int pos = (sizeof( data ) / sizeof( data[0] ));
-       // if(pos <= byte_count)
-       //    data[pos] = operation;
-        int i = 0;
-        while(Wire.available()){
-            if(i <= byte_count)
-                data[i++] = Wire.read();
-        }
-    }
-}
-
-void i2c_pi::send_data(int number){
-
-}
 
 bool i2c_pi::get_on(){
     return on;
 }
 
+void i2c_pi::set_on(bool val){
+	on=val
+}
 int * i2c_pi::get_data(){
     return data;
 }
+void i2c_pi::set_data(){
 
+}
 int i2c_pi::get_operation(){
     return operation;
+}
+int i2c_pi::set_operation(int val){
+	operation = val
 }
 //i2c_pi_with_arg
 i2c_pi_with_arg::i2c_pi_with_arg(int addr){

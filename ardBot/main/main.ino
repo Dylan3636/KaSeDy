@@ -115,5 +115,33 @@ void loop() {
   pidL.update(sensorValues);
   delay(1000);
 }
+void receive_data(int byte_count){
+    data = pi.get_data();
+    if(data !=  nullptr){
+        delete data;
+        data = nullptr;
+    }
+    data = new int[byte_count];
+    pi.set_operation(Wire.read()); // internal address read from Wire
+
+    if (operation == 0x00)
+        pi.set_on = Wire.read()==1;          //Turn Arduino on/off
+    else{
+        int pos = (sizeof( data ) / sizeof( data[0] ));
+       // if(pos <= byte_count)
+       //    data[pos] = operation;
+        int i = 0;
+        while(Wire.available()){
+            if(i <= byte_count)
+                data[i++] = Wire.read();
+        }
+    }
+    pi.set_data(data)
+}
+
+void send_data(int number){
+
+}
+
 
 
