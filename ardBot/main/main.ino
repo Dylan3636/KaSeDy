@@ -35,19 +35,7 @@ void setup() {
     pinMode(13, OUTPUT);
     digitalWrite(13, HIGH);
 
-    m1.setSpeed(175);
-    m2.setSpeed(175);
-        
-    m1.run(RELEASE);
-    m2.run(RELEASE);
-
-    m1.run(FORWARD);
-    m2.run(BACKWARD);
-
-    for (int i = 0; i < 50; i++)  // make the calibration take about 10 seconds
-  {
-    qtra.calibrate();       // reads all sensors 10 times at 2.5 ms per six sensors (i.e. ~25 ms per call)
-  }
+    
     m1.run(RELEASE);
     m2.run(RELEASE);
 
@@ -145,6 +133,20 @@ void receive_data(int byte_count){
 void send_data(int number){
 
 };
+void calibrate(){
+  m1.setSpeed(175);
+    m2.setSpeed(175);
+        
+    m1.run(RELEASE);
+    m2.run(RELEASE);
 
+    m1.run(FORWARD);
+    m2.run(BACKWARD);
+
+    for (int i = 0; i < 50; i++)  // make the calibration take about 10 seconds
+  {
+    qtra.calibrate();       // reads all sensors 10 times at 2.5 ms per six sensors (i.e. ~25 ms per call)
+  }
+};
 
 

@@ -34,5 +34,3 @@ public:
 
 
 #endif // _I2C_PI_H_
-
-
