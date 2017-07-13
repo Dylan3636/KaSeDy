@@ -3,6 +3,7 @@
 #include <time.h>
 #include <PID.h>
 #include <i2c_pi.h>
+#include <Wire.h>
 
 AF_DCMotor m1(1);
 AF_DCMotor m2(2);
@@ -23,6 +24,8 @@ i2c_pi pi= i2c_pi();
 bool on = false;
 
 void setup() {
+  Wire.onReceive(receive_data);
+  //Wire.onRequest(send_data);
     while(!on){
       on = pi.get_on();
       delay(50);
@@ -116,7 +119,7 @@ void loop() {
   delay(1000);
 }
 void receive_data(int byte_count){
-    data = pi.get_data();
+    int * data = pi.get_data();
     if(data !=  nullptr){
         delete data;
         data = nullptr;
@@ -124,8 +127,8 @@ void receive_data(int byte_count){
     data = new int[byte_count];
     pi.set_operation(Wire.read()); // internal address read from Wire
 
-    if (operation == 0x00)
-        pi.set_on = Wire.read()==1;          //Turn Arduino on/off
+    if (pi.get_operation() == 0x00)
+        pi.set_on(Wire.read()==1);          //Turn Arduino on/off
     else{
         int pos = (sizeof( data ) / sizeof( data[0] ));
        // if(pos <= byte_count)
@@ -136,12 +139,12 @@ void receive_data(int byte_count){
                 data[i++] = Wire.read();
         }
     }
-    pi.set_data(data)
-}
+    pi.set_data(data);
+};
 
 void send_data(int number){
 
-}
+};
 
 
 

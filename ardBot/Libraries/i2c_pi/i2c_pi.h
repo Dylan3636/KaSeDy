@@ -15,9 +15,11 @@ public:
     //void receive_data(int byte_count);
     //void send_data(int number);
     bool get_on();
+    void set_on(bool val);
     int * get_data();
+    void set_data(int * val);
     int get_operation();
-
+    int set_operation(int val);
 };
 
 class i2c_pi_with_arg: public i2c_pi{
