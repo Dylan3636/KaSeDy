@@ -14,6 +14,7 @@ class Motor_Control{
 		void backward_forever(int speed);
 		void turn_clockwise_forever(int speed);
 		void turn_anticlockwise_forever(int speed);
+		void halt();
 
 };
 

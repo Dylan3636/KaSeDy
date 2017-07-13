@@ -1,8 +1,9 @@
 #include "Motor_Control.h"
+#include <AFMotor.h>
 
-Motor_Control::Motor_Control(int m1, int m2){
-	AF_DCMotor l(m1);
-	AF_DCMotor r(m2);
+Motor_Control::Motor_Control(int m1, int m2):l{AF_DCMotor(m1)}, r{AF_DCMotor(m2)}{
+	//l = AF_DCMotor(m1);
+	//r = AF_DCMotor(m2);
 
 }
 void Motor_Control::forward_forever(int speed){
@@ -40,4 +41,7 @@ void Motor_Control::turn_anticlockwise_forever(int speed){
 	l.run(BACKWARD);
 	r.run(FORWARD);
 }
-
+void Motor_Control::halt(){
+	l.run(RELEASE);
+	r.run(RELEASE);
+}
