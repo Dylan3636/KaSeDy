@@ -7,26 +7,30 @@ bool on = false;
 
 void setup() {
   // put your setup code here, to run once:
-  
+    Serial.begin(9600);
     Wire.onReceive(receive_data);
     while(!on){
       on = pi.get_on();
-      delay(50);
+      Serial.println("setup");
+      delay(500);
     }
 
 }
 
 void loop() {
   while(on == false){
-    bool on = pi.get_on();
+    on = pi.get_on();
+    Serial.println(on);
+    delay(500);
   }
 
   int* data = pi.get_data();
-  
+  //Serial.println(data[]);
   if((data!=nullptr)){
     int op = pi.get_operation();
+    //Serial.println(op);
     if(op==0x02){
-        int action = data[1];
+        int action = data[0];
 
         switch(action) {
           case 0: motors.halt();break;
@@ -38,7 +42,7 @@ void loop() {
 
     }
   }
-  
+  delay(500);
 }
 void receive_data(int byte_count){
     int * data = pi.get_data();
@@ -58,9 +62,12 @@ void receive_data(int byte_count){
         int i = 0;
         while(Wire.available()){
             if(i <= byte_count)
+                Serial.println(data[i]);
                 data[i++] = Wire.read();
         }
     }
     pi.set_data(data);
+    Serial.println(pi.get_operation());
+    Serial.println(pi.get_on());
 };
 

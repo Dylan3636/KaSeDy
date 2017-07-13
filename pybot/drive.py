@@ -42,7 +42,7 @@ while(exit == 0):
         code = 4
     else:
         print event
-    ard.talk(code, 0x02)
+    ard.talk([code], 0x02)
 
 curses.endwin()
 
