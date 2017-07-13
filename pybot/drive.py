@@ -23,7 +23,7 @@ while(exit == 0):
     event = screen.getch()
     #click.echo(message='Direct me! (Press q to quit.)')
     #c=click.getchar()
-    ard.talk([code], 0x02)
+    ard.talk([long(code)], 0x02)
 
     if event == 113:
         exit = 1
@@ -43,6 +43,6 @@ while(exit == 0):
         code = 4
     else:
         print event
-
+ard.talk([0])
 curses.endwin()
 
