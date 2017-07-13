@@ -16,13 +16,14 @@ try:
 finally:
     curses.endwin()
     screen.addstr("Press a key\n")
-
+code = 0
 while(exit == 0):
     #value = raw_input('Enter PID gains (q to quit): ')
 
     event = screen.getch()
     #click.echo(message='Direct me! (Press q to quit.)')
     #c=click.getchar()
+    ard.talk([code], 0x02)
 
     if event == 113:
         exit = 1
@@ -42,7 +43,6 @@ while(exit == 0):
         code = 4
     else:
         print event
-    ard.talk([code], 0x02)
 
 curses.endwin()
 
