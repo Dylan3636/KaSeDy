@@ -1,5 +1,5 @@
-#ifndef _Motor_Control_H
-#define _Motor_Control_H
+#ifndef _Motor_Control_H_
+#define _Motor_Control_H_
 
 #include <AFMotor.h>
 
@@ -9,11 +9,11 @@ class Motor_Control{
 		AF_DCMotor r;
 	
 	public:
-		Motor_Control(AF_DCMotor l, AF_DCMotor r);
-		void forward(int speed)
-		void backward(int speed)
-		void turn_clockwise(int speed)
-		void turn_anticlockwise(int speed)
+		Motor_Control(int m1, int m2);
+		void forward_forever(int speed);
+		void backward_forever(int speed);
+		void turn_clockwise_forever(int speed);
+		void turn_anticlockwise_forever(int speed);
 
 };
 

@@ -2,53 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="871949d6-0f16-4d40-a587-7e3242b575de" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/drive.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/.github/ISSUE_TEMPLATE.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/.github/PULL_REQUEST_TEMPLATE.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/Adafruit_MotorShield.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/Adafruit_MotorShield.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/examples/Accel_ConstantSpeed/Accel_ConstantSpeed.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/examples/Accel_MultiStepper/Accel_MultiStepper.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/examples/DCMotorTest/DCMotorTest.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/examples/MotorParty/MotorParty.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/examples/StackingTest/StackingTest.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/examples/StepperTest/StepperTest.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/keywords.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/library.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/license.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/utility/Adafruit_MS_PWMServoDriver.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/utility/Adafruit_MS_PWMServoDriver.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_V2_Library-master/utility/license.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_library-1.0.0/AFMotor.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_library-1.0.0/AFMotor.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_library-1.0.0/README.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_library-1.0.0/examples/AFMotor_ConstantSpeed/AFMotor_ConstantSpeed.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_library-1.0.0/examples/AFMotor_MultiStepper/AFMotor_MultiStepper.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_library-1.0.0/examples/MotorParty/MotorParty.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_library-1.0.0/examples/MotorTest/MotorTest.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_library-1.0.0/examples/StepperTest/StepperTest.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_library-1.0.0/keywords.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/Adafruit_Motor_Shield_library-1.0.0/library.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/qtr-sensors-arduino-3.0.0/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/qtr-sensors-arduino-3.0.0/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/qtr-sensors-arduino-3.0.0/QTRSensors.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/qtr-sensors-arduino-3.0.0/QTRSensors.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/qtr-sensors-arduino-3.0.0/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/qtr-sensors-arduino-3.0.0/examples/QTRAExample/QTRAExample.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/qtr-sensors-arduino-3.0.0/examples/QTRARawValuesExample/QTRARawValuesExample.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/qtr-sensors-arduino-3.0.0/examples/QTRRCExample/QTRRCExample.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/qtr-sensors-arduino-3.0.0/examples/QTRRCRawValuesExample/QTRRCRawValuesExample.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/qtr-sensors-arduino-3.0.0/keywords.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/Libraries/qtr-sensors-arduino-3.0.0/library.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/libraries/Motors/Motors.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/libraries/Motors/Motors.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../ardBot/main/main.ino" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/pybot.iml" afterPath="$PROJECT_DIR$/.idea/pybot.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ardI2C.py" afterPath="$PROJECT_DIR$/ardI2C.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trainPID.py" afterPath="$PROJECT_DIR$/trainPID.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ardBot/libraries/Motor_Control/Motor_Control.cpp" afterPath="$PROJECT_DIR$/../ardBot/libraries/Motor_Control/Motor_Control.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/drive.py" afterPath="$PROJECT_DIR$/drive.py" />
     </list>
     <ignored path="pybot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -165,21 +120,21 @@
       <file leaf-file-name="drive.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/drive.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-              <folding>
-                <element signature="e#45#63#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-224">
+              <caret line="16" column="18" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kalmantest.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kalmantest.py">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://C:/ProgramData/Anaconda2/Lib/curses/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="294">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="e#247#268#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -215,10 +170,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="69" />
-    <option name="y" value="-9" />
-    <option name="width" value="1860" />
-    <option name="height" value="1098" />
+    <option name="x" value="70" />
+    <option name="width" value="937" />
+    <option name="height" value="1088" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -518,15 +472,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="69" y="-9" width="1860" height="1098" extended-state="6" />
+    <frame x="70" y="0" width="937" height="1088" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11997829" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24047878" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919767" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3257024" sideWeight="0.5043431" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16441207" sideWeight="0.49782845" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3257024" sideWeight="0.4956569" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32912722" sideWeight="0.4956569" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919767" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -566,16 +520,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Sensors/TSL2591.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3780">
-          <caret line="181" column="0" lean-forward="false" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
-          <folding>
-            <element signature="e#370#382#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ardI2C.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -1034,13 +978,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://C:/ProgramData/Anaconda2/Lib/curses/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#247#268#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/drive.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="e#45#63#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-224">
+          <caret line="16" column="18" lean-forward="false" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
