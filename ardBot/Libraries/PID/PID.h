@@ -8,15 +8,15 @@
 
 class PID{
     private:
-        float gains[];
+        float * gains = nullptr;
         static const int WINDOW = 10;
-        int integralValues[WINDOW];
-        int integralPos;
-        int prevVal;
-        int t;
-        int previous_reading = 0;
+        int * integralValues = nullptr;// [WINDOW];
+        int * integralPos = nullptr;
+        int * t = nullptr;
+        int * previous_reading = nullptr;
     public:
         PID(float stupidGains[] );
+        ~PID();
         float update(int reading);
         void set_gains(float gains[]);
 };
