@@ -1,29 +1,26 @@
 #include "PID.h"
 
-PID::PID(AF_DCMotor motor,char motorType, QTRSensorsAnalog qtra,float stupidGains[] ): motor{motor}, motorType{motorType}, qtra{qtra}{
+PID::PID(float stupidGains[] ){
       for (int i =0;i<3;i++){
         gains[i] = stupidGains[i];
       }
       
  }
+ void PID::set_gains(float new_gains[]){
+ 	 for (int i =0;i<3;i++){
+        gains[i] = new_gains[i];
+      }
+ }
 
-int PID::update(unsigned int sensorValues[]){
+float PID::update(int reading){
       int t1 = t;
-      unsigned int position = qtra.readLine(sensorValues);
       int t2 = millis();
       float deltaT = (float)(t2-t1)/1000;
       t=t2;
-      int val =0;
-      if (motorType == 'L'){
-        val = sensorValues[3];
-      }
-      else{
-        val = sensorValues[2];
-      }
-      int error = 0-val;
-      int deltaError = val-prevVal;
+      int error = 0-reading;
+      int deltaError = reading - previous_reading;
       float derivVal = (float) deltaError/deltaT;
-      prevVal = val;
+      previous_reading = reading;
 
       integralPos=(integralPos+1)%10;
       integralValues[integralPos] = error;

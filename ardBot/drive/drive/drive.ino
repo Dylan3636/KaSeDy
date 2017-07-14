@@ -1,47 +1,36 @@
 #include <i2c_pi.h>
 #include <Motor_Control.h>
 
+#define DEFAULT_SPEED 100
+
 i2c_pi pi = i2c_pi();
 Motor_Control motors = Motor_Control(1,2) ;
 bool on = false;
-bool passed = false;
-void setup() {
-  // put your setup code here, to run once:
+
+void setup() { 
     Serial.begin(9600);
     Wire.onReceive(receive_data);
-//    while(!on){
-//      on = pi.get_on();
-//      Serial.println("setup");
-//      delay(500);
-//    }
-
 }
 
 void loop() {
+  
   while( !on){
     on = pi.get_on();
-    Serial.println(on);
     delay(500);
   }
 
   int* data = pi.get_data();
-  //Serial.println(data[0]);
-  //Serial.println(data[0]);
-  if((data!=nullptr)){
-    int op = pi.get_operation();
-    //Serial.println(data[0]);
-    //Serial.println(op);
-    if(op==0x02){
-        Serial.println(data[1]);
+
+  if((data!=nullptr)){   
+    if(pi.get_operation()==0x02){
         int action = data[1];
         switch(action) {
           case 0: motors.halt();break;
-          case 1: motors.forward_forever(100); break;
-          case 2: motors.turn_anticlockwise_forever(100); break;
-          case 3: motors.turn_clockwise_forever(100); break;
-          case 4: motors.backward_forever(100); break;
-    }
-
+          case 1: motors.forward_forever(DEFAULT_SPEED); break;
+          case 2: motors.turn_anticlockwise_forever(DEFAULT_SPEED); break;
+          case 3: motors.turn_clockwise_forever(DEFAULT_SPEED); break;
+          case 4: motors.backward_forever(DEFAULT_SPEED); break;
+      }
     }
   }
   delay(500);
@@ -55,22 +44,17 @@ void receive_data(int byte_count){
     data = new int[byte_count];
     pi.set_operation(Wire.read()); // internal address read from Wire
     if (pi.get_operation() == 0x00){
-        Serial.println(passed);
         pi.set_on(Wire.read()==1);
         while(Wire.available()){Wire.read();}}        //Turn Arduino on/off
     else{
         int pos = (sizeof( data ) / sizeof( data[0] ));
-       // if(pos <= byte_count)
-       //    data[pos] = operation;
         int i = 0;
         while(Wire.available()){
             if(i <= byte_count)
                 data[i++] = Wire.read();
-                //Serial.println(data[i]);
         }
             pi.set_data(data);
     }
-    //Serial.println(pi.get_operation());
-    //Serial.println(pi.get_on());
+ 
 };
 
