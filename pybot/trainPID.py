@@ -8,6 +8,7 @@ while exit == 0:
     if value == 'q':
         exit = 1
     else:
-        values = map(float, value.split(' '))
-        ard.talk(values,0x01)
+        values = map(int, value.split(' '))
+        print values
+	#ard.talk(values,0x01)
 ard.talk(0)
