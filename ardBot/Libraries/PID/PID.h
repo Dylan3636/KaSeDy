@@ -14,6 +14,7 @@ class PID{
         int integralPos;
         int prevVal;
         int t;
+        int previous_reading = 0;
     public:
         PID(float stupidGains[] );
         float update(int reading);
