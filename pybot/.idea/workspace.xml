@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="871949d6-0f16-4d40-a587-7e3242b575de" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trainPID.py" afterPath="$PROJECT_DIR$/trainPID.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ardI2C.py" afterPath="$PROJECT_DIR$/ardI2C.py" />
     </list>
     <ignored path="pybot.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ardI2C.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ardI2C.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ardI2C.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="168">
-              <caret line="8" column="68" lean-forward="true" selection-start-line="8" selection-start-column="68" selection-end-line="8" selection-end-column="68" />
+              <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -105,11 +105,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="trainPID.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="trainPID.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/trainPID.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+            <state relative-caret-position="231">
+              <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -149,9 +149,9 @@
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/Sensors/LSM6DS33.py" />
         <option value="$PROJECT_DIR$/Sensors/TSL2591.py" />
-        <option value="$PROJECT_DIR$/ardI2C.py" />
         <option value="$PROJECT_DIR$/drive.py" />
         <option value="$PROJECT_DIR$/trainPID.py" />
+        <option value="$PROJECT_DIR$/ardI2C.py" />
       </list>
     </option>
   </component>
@@ -482,7 +482,21 @@
       <option name="project" value="LOCAL" />
       <updated>1500059595853</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="c">
+      <created>1500060210228</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1500060210228</updated>
+    </task>
+    <task id="LOCAL-00007" summary="trying i2c">
+      <created>1500060829352</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1500060829352</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -533,7 +547,8 @@
     <MESSAGE value="finished script for PID tuning" />
     <MESSAGE value="removed semi-colons" />
     <MESSAGE value="c" />
-    <option name="LAST_COMMIT_MESSAGE" value="c" />
+    <MESSAGE value="trying i2c" />
+    <option name="LAST_COMMIT_MESSAGE" value="trying i2c" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -987,16 +1002,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ardI2C.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="68" lean-forward="true" selection-start-line="8" selection-start-column="68" selection-end-line="8" selection-end-column="68" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/ProgramData/Anaconda2/Lib/curses/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
@@ -1017,9 +1022,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/trainPID.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+        <state relative-caret-position="231">
+          <caret line="11" column="20" lean-forward="true" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ardI2C.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="26" lean-forward="false" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

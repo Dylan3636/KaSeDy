@@ -6,7 +6,7 @@ class Arduino():
         self.bus = smbus.SMBus(i2c_bus)
 
     def talk(self,message,internal_addr=0x00):
-        self.bus.write_block_data(self.address,internal_addr,message )
+        self.bus.write_i2c_block_data(self.address,internal_addr,message )
 
     def listen(self):
         return self.bus.read_byte(self.address)
