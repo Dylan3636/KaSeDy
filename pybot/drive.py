@@ -5,7 +5,7 @@ ard = Arduino()
 import curses
 exit = 0
 
-ard.talk([1],0x02)
+ard.talk([1],0x00)
 screen = curses.initscr()
 
 try:
