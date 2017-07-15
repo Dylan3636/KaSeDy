@@ -17,7 +17,7 @@ public:
     bool get_on();
     void set_on(bool val);
     int * get_data();
-    void set_data(int * val);
+    void set_data(int val[], int pos);
     int get_operation();
     int set_operation(int val);
 };

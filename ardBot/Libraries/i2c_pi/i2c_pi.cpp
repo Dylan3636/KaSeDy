@@ -27,8 +27,7 @@ void i2c_pi::set_on(bool val){
 int * i2c_pi::get_data(){
     return data;
 }
-void i2c_pi::set_data(int * val){
-    int pos = (sizeof( val ) / sizeof( val[0] ));
+void i2c_pi::set_data(int val[], int pos){
     if(data != nullptr){
         delete data;
         data = nullptr;

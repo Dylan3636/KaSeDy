@@ -50,7 +50,7 @@ float PID::update(int reading){
       int integralSum=0;
       
       for (int i = 0; i < WINDOW; i++){
-          integralSum = *integralSum + integralValues[i];
+          integralSum = integralSum + integralValues[i];
       }
       Serial.print(error);
       Serial.print('\t');
@@ -66,10 +66,10 @@ float PID::update(int reading){
       Serial.print(gains[0]);
       Serial.print('\t');
 
-      Serial.print(gains[0]);
+      Serial.print(gains[1]);
       Serial.print('\t');
 
-      Serial.println(gains[0]);
+      Serial.println(gains[2]);
 
       return gains[0]*error + gains[1]*derivVal + gains[2]*integralSum;
 }

@@ -60,7 +60,7 @@ void loop() {
     m2.run(RELEASE);
     delay(1500);
   }
-  //update_gains();
+  update_gains();
   
   //unsigned int position = qtra.readLine(sensorValues);
   
@@ -70,7 +70,7 @@ void loop() {
     //Serial.print('\t');
  //}
   Serial.println("loop");
-  //pidL.update();
+  pidL.update();
   pidR.update();
   delay(1000);
 }
@@ -84,25 +84,26 @@ void receive_data(int byte_count){
         delete data;
         data = nullptr;
     }
-    Serial.println(1);
+    //Serial.println(1);
     data = new int[byte_count];
     pi.set_operation(Wire.read()); // internal address read from Wire
-    Serial.println(2);
+    //Serial.println(2);
     if (pi.get_operation() == 0x00){
         pi.set_on(Wire.read()==1); //Turn Arduino on/off
         while(Wire.available()){Wire.read();} //Empty bus
-        Serial.println(3);}      
+        //Serial.println(3);
+        }      
     else{
         new_gains = true;
         int pos = (sizeof( data ) / sizeof( data[0] ));
         int i = 0;
-        Serial.println(4);
+        //Serial.println(4);
         while(Wire.available()){
-            if(i <= byte_count)
-                data[i++] = Wire.read();
+          
+           data[i++] = Wire.read();
+           Serial.println(data[i-1]);
         }
-        pi.set_data(data);
-        Serial.println(5);
+        pi.set_data(data, byte_count - 1);
     }
  
 };
@@ -140,12 +141,12 @@ void update_gains(){
       for(int i = 0; i < 3; i++){
         gains[i] = data[i];
       }
-      Serial.println(1);
+      //Serial.println(1);
     }
-    Serial.println(2);
+    //Serial.println(2);
   }
   pidL.set_gains(gains);
-  Serial.println(3);
+  //Serial.println(3);
   pidR.set_gains(gains);
   new_gains = false;
   

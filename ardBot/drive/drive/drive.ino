@@ -47,7 +47,6 @@ void receive_data(int byte_count){
         pi.set_on(Wire.read()==1);
         while(Wire.available()){Wire.read();}}        //Turn Arduino on/off
     else{
-        int pos = (sizeof( data ) / sizeof( data[0] ));
         int i = 0;
         while(Wire.available()){
             if(i <= byte_count)
