@@ -95,7 +95,8 @@ class OCGridLocalization:
                 else:
                     prob[i] = np.zeros([len(self.gl.states),1])
                 i = i+1
-            self.colour_model[reading]= np.sum(prob*1/np.size(prob,0))
+            temp = np.sum(prob * 1 / np.size(prob, 0))
+            self.colour_model[reading] = temp / np.sum(temp)
 
     def colour_sensor_model(self,reading):
         return self.colour_model[reading]
