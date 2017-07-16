@@ -1,6 +1,9 @@
-import sympy
 import numpy as np
 import KalmanFilter
+import numpy as np
+
+import KalmanFilter
+
 
 class EKF1():
 
@@ -10,7 +13,7 @@ class EKF1():
         self.x_hat = [0,0,0,0,0]
         self.P = np.eye(5)
         H= np.matrix([[1,0,0],[0,1,0],[0,0,1],[0,0,0],[0,0,0]])
-        self.kf = KalmanFilter(5,3,H)
+        self.kf = KalmanFilter(5, 3, H)
         (self.alpha1,self.alpha2,self.alpha3,self.alpha4,self.alpha5) =alphas
         self.sample = sample
 

@@ -1,0 +1,14 @@
+import numpy as np
+class BayesFilter():
+    '''Basic filter for estimating discrete states.'''
+    def __init__(self,transition_model,sensor_model,initial_probabilities):
+        self.transition_model = transition_model #Function that takes an action and returns the transition probabilities.
+        self.sensor_model = sensor_model # Function that takes sensor readings and returns probabilities of seeing that readings given the states.
+        self.posterior = initial_probabilities  # Nx1 matrix describing the probability of being in each of the N states.
+
+    def update(self,action,sensor_reading):
+        transition_probabilities = self.transition_model(action)  # NxN numpy matrix describing the probabilities of trasnsitioning from one state to the next.
+        p_hat = transition_probabilities*self.posterior
+        z = self.sensor_model(sensor_reading) # Probabilities of seeing the sensor reading in the given states P(z|X)
+        temp = np.multiply(p_hat,z)
+        self.posterior = temp/np.sum(temp)

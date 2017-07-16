@@ -1,4 +1,4 @@
-from ardI2C import Arduino
+from I2c.ardI2C import Arduino
 ard = Arduino()
 
 exit = 0

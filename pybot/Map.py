@@ -26,7 +26,9 @@ class Map:
                 edges.append((i+1, self.connections[i][j]))
         G = nx.Graph()
         G.add_edges_from(edges)
-        pos=nx.random_layout(G)
+        pos=self.get_pos()
+        print nx.random_layout(G)
+        print pos
         for i in range(0, len(self.colour_map)):
             nx.draw_networkx_nodes(G,pos,nodelist=[i+1],node_color=[self.colour_map[i]])
             nx.draw_networkx_labels(G,pos,labels={i+1:i+1})
@@ -37,11 +39,23 @@ class Map:
         plt.title('Graph')
         plt.show()
     def get_pos(self):
-        pos={1:(5,5)}
+        pos={1:np.array([5,5])}
         for i in range(0,np.size(self.connections,0)):
             for j in range(0,len(self.connections[i])):
-                if self.direction_map[i][j]=='N':
-                    pos[i+1] =pos[i+1][0]
+                x=0
+                y=0
+                ind = self.connections[i][j]
+                card=self.direction_map[i][j]
+                if card =='N':
+                    x,y = 0,1
+                elif card =='S':
+                    x,y = 0,-1
+                elif card =='E':
+                    x,y = 1,0
+                else:
+                    x,y = -1,0
+                pos[ind] =np.array([pos[i+1][0]+x,pos[i+1][1]+y])
+        return pos
 
 
 
