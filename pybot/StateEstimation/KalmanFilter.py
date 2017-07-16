@@ -46,6 +46,63 @@ class KalmanFilter(object):
     def stateProb(self):
         return multivariate_normal.pdf(self.x_hat,self.x_hat,self.P)
 
+    class AGOKalmanFilter():
+
+        def __init__(self, odom, imu, alphas=[0.1, 0.1, 0.1, 0.1], sample=False):
+            self.odom = odom
+            self.imu = imu
+            self.x_hat = [0, 0, 0, 0, 0]
+            self.P = np.eye(5)
+            H = np.matrix([[1, 0, 0], [0, 1, 0], [0, 0, 1], [0, 0, 0], [0, 0, 0]])
+            self.kf = KalmanFilter(5, 3, H)
+            (self.alpha1, self.alpha2, self.alpha3, self.alpha4, self.alpha5) = alphas
+            self.sample = sample
+
+        def update(self):
+            (z, R) = self.proccessOdomData()
+            (A, B, u, Q) = self.proccessIMUData()
+            (self.x_hat, self.P) = (self.x_hat_prime, self.P_prime)
+            (self.x_hat_prime, self.P_prime) = self.kf.updateBeliefState(u, z, A, B, Q, R)
+
+        def proccessIMUData(self):
+            [u, deltaT] = self.imu.read()
+            A = [[1, 0, 0, deltaT, 0], [0, 1, 0, 0, deltaT], [0, 0, 1, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
+            B = [[0.5 * deltaT ** 2, 0, 0], [0, 0.5 * deltaT ** 2, 0], [0, 0, deltaT], [deltaT, 0, 0], [0, deltaT, 0]]
+            M = np.Matrix([[0.5 * deltaT ** 2], [0.5 * deltaT ** 2], [deltaT], [deltaT], [deltaT]])
+            Q = M * M.T * 0.01
+
+            return (A, B, u, Q)
+
+        def proccessOdomData(self):
+            (xbar, ybar, theta_bar, x_bar_prime, y_bar_prime, theta_bar_prime) = self.odom.update()
+            (x, y, theta,) = self.x_hat
+
+            xdiff = x_bar_prime - xbar
+            ydiff = y_bar_prime - ybar
+
+            deltaRot1 = np.sqrt(xdiff ** 2 + ydiff ** 2)
+            deltaTrans = np.arctan2(ydiff, xdiff) - theta_bar
+            deltaRot2 = theta_bar_prime - theta_bar - deltaRot1
+
+            (err1, err2, err3) = (self.alpha1 * deltaRot1 + self.alpha2 * deltaTrans,
+                                  self.alpha3 * deltaTrans + self.alpha4 * (deltaRot1 + deltaRot2),
+                                  self.alpha1 * deltaRot1 + self.alpha2 * deltaTrans)
+            if self.sample:
+                deltaRot1 = deltaRot1 - np.random.normal(0, err1, 1)
+                deltaTrans = deltaTrans - np.random.normal(0, err2, 1)
+                deltaRot2 = deltaRot2 - np.random.normal(0, err3, 1)
+            h1 = np.cos(theta + deltaRot1) - theta_bar
+            h2 = np.sin(theta + deltaRot1) - theta_bar
+
+            p = x + deltaTrans * h1
+            q = y + deltaTrans * h2
+            r = theta + deltaRot1 + deltaRot2
+
+            f = np.array([p, q, r]).T
+            R = np.diag([err1, err2, err3])
+            return (f, R)
+
+
 def main():
     A = [1]
     B = A
@@ -70,6 +127,8 @@ def main():
     plt.ylabel('Voltage')
     plt.show()
     return kf
+
+
 
 if __name__ == "__main__":
   main()

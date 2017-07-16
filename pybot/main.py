@@ -1,6 +1,5 @@
 from time import sleep
 
-from StateEstimation import KalmanFilter
 from Sensors import LSM6DS33
 
 

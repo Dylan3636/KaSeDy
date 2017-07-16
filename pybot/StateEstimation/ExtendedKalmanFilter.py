@@ -1,6 +1,4 @@
 import numpy as np
-import KalmanFilter
-import numpy as np
 
 import KalmanFilter
 
