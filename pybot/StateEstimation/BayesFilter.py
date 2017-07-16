@@ -12,9 +12,9 @@ class DiscreteBayesFilter:
     def update(self,action,sensor_reading):
         transition_probabilities = np.matrix(self.transition_model(action))  # NxN numpy matrix describing the probabilities of trasnsitioning from one state to the next.
         bel_bar = np.dot(transition_probabilities,self.posterior)
-        z = np.array(self.sensor_model(sensor_reading)) # Probabilities of seeing the sensor reading in the given states P(z|X)
-        z=z.reshape([len(z),1])
-        temp = np.multiply(bel_bar,z)
+        sensor_prob = np.array(self.sensor_model(sensor_reading)) # Probabilities of seeing the sensor reading in the given states P(z|X)
+        sensor_prob=sensor_prob.reshape([len(sensor_prob),1])
+        temp = np.multiply(bel_bar,sensor_prob)
         self.posterior = temp/np.sum(temp)
         return self.posterior
 
