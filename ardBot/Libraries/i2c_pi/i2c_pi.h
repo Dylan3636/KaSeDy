@@ -12,8 +12,6 @@ private:
 public:
     i2c_pi();
     ~i2c_pi();
-    //void receive_data(int byte_count);
-    //void send_data(int number);
     bool get_on();
     void set_on(bool val);
     int * get_data();

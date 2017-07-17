@@ -5,8 +5,6 @@
 //i2c_pi
 i2c_pi::i2c_pi(){
      Wire.begin(SLAVE_ADDRESSS);
-//     Wire.onReceive(receive_data);
-//     Wire.onRequest(send_data);
 }
 
 
@@ -47,6 +45,4 @@ int i2c_pi::set_operation(int val){
 i2c_pi_with_arg::i2c_pi_with_arg(int addr){
      SLAVE_ADDRESSS = addr;
      Wire.begin(SLAVE_ADDRESSS);
-//     Wire.onReceive(receive_data);
-//     Wire.onRequest(send_data);
 }

@@ -10,11 +10,16 @@ class Motor_Control{
 	
 	public:
 		Motor_Control(int m1, int m2);
-		void forward_forever(int speed);
-		void backward_forever(int speed);
-		void turn_clockwise_forever(int speed);
-		void turn_anticlockwise_forever(int speed);
 		void halt();
+		void forward_forever(int speed);
+		void forward(int speed, int time);
+		void backward_forever(int speed);
+		void backward(int speed, int time);
+		void turn_clockwise_forever(int speed);
+		void turn_clockwise(int speed, int time);
+		void turn_anticlockwise_forever(int speed);
+		void turn_anticlockwise(int speed, int time);
+
 
 };
 
