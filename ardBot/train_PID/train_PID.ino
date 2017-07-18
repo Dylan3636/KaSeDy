@@ -1,5 +1,5 @@
 #include <QTRSensors.h>
-#include <Adafruit_MotorShield.h>
+#include "Adafruit_MotorShield.h"
 #include <time.h>
 #include <Line_PID.h>
 #include <i2c_pi.h>
@@ -120,9 +120,9 @@ void calibrate_run(){
     m1 -> run(FORWARD);
     m2 -> run(BACKWARD);
 
-    for (int i = 0; i < 50; i++)  // make the calibration take about 10 seconds
+    for (int i = 0; i < 40; i++)  // make the calibration take about 10 seconds
   {
-    //qtra.calibrate();       // reads all sensors 10 times at 2.5 ms per six sensors (i.e. ~25 ms per call)
+    qtra.calibrate();       // reads all sensors 10 times at 2.5 ms per six sensors (i.e. ~25 ms per call)
   }
     m1 -> run(RELEASE);
     m2 -> run(RELEASE);
