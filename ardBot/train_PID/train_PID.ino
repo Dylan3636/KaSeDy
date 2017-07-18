@@ -1,5 +1,5 @@
 #include <QTRSensors.h>
-#include <AFMotor.h>
+#include <Adafruit_MotorShield.h>
 #include <time.h>
 #include <Line_PID.h>
 #include <i2c_pi.h>
@@ -15,8 +15,9 @@
 // Defining global variables
 
 //Motors
-AF_DCMotor m1(1);
-AF_DCMotor m2(2);
+Adafruit_MotorShield AFMS = Adafruit_MotorShield();
+Adafruit_DCMotor * m1 = AFMS.getMotor(1);
+Adafruit_DCMotor * m2 = AFMS.getMotor(2);
 //Line Sensors
 QTRSensorsAnalog qtra((unsigned char[]) {0, 1, 2, 3},NUM_SENSORS, NUM_SAMPLES_PER_SENSOR, EMITTER_PIN);
 
@@ -56,8 +57,8 @@ void loop() {
   
   while(pi.get_on() == false){
     Serial.println("Arduino was put to sleep. Waiting to be turned on...");
-    m1.run(RELEASE);
-    m2.run(RELEASE);
+    m1 -> run(RELEASE);
+    m2 -> run(RELEASE);
     delay(1500);
   }
   update_gains();
@@ -110,21 +111,21 @@ void receive_data(int byte_count){
 
 
 void calibrate_run(){
-    m1.setSpeed(CALIBRATE_SPEED);
-    m2.setSpeed(CALIBRATE_SPEED);
+    m1 -> setSpeed(CALIBRATE_SPEED);
+    m2 -> setSpeed(CALIBRATE_SPEED);
         
-    m1.run(RELEASE);
-    m2.run(RELEASE);
+    m1 -> run(RELEASE);
+    m2 -> run(RELEASE);
 
-    m1.run(FORWARD);
-    m2.run(BACKWARD);
+    m1 -> run(FORWARD);
+    m2 -> run(BACKWARD);
 
     for (int i = 0; i < 50; i++)  // make the calibration take about 10 seconds
   {
     //qtra.calibrate();       // reads all sensors 10 times at 2.5 ms per six sensors (i.e. ~25 ms per call)
   }
-    m1.run(RELEASE);
-    m2.run(RELEASE);
+    m1 -> run(RELEASE);
+    m2 -> run(RELEASE);
 
 };
 void update_gains(){

@@ -2,7 +2,6 @@
 #define _PID_H_
 
 #include <QTRSensors.h>
-#include <AFMotor.h>
 #include <time.h>
 #include <Arduino.h>
 

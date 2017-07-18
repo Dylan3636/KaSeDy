@@ -1,15 +1,15 @@
 #ifndef _Motor_Control_H_
 #define _Motor_Control_H_
 
-#include <AFMotor.h>
+#include <Adafruit_MotorShield.h>
 
 class Motor_Control{
 	private:
-		AF_DCMotor l;
-		AF_DCMotor r;
+		Adafruit_DCMotor* l;
+		Adafruit_DCMotor* r;
 	
 	public:
-		Motor_Control(int m1, int m2);
+		Motor_Control(Adafruit_DCMotor* m1, Adafruit_DCMotor* m2);
 		void halt();
 		void forward_forever(int speed);
 		void forward(int speed, int time);

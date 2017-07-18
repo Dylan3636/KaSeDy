@@ -1,10 +1,14 @@
 #include <i2c_pi.h>
 #include <Motor_Control.h>
+#include <Adafruit_MotorShield.h>
 
 #define DEFAULT_SPEED 100
 
 i2c_pi pi = i2c_pi();
-Motor_Control motors = Motor_Control(1,2) ;
+Adafruit_MotorShield AFMS = Adafruit_MotorShield();
+Adafruit_DCMotor *m1 = AFMS.getMotor(1);
+Adafruit_DCMotor *m2 = AFMS.getMotor(2); 
+Motor_Control motors = Motor_Control(m1,m2);
 bool on = false;
 
 void setup() { 
@@ -52,7 +56,7 @@ void receive_data(int byte_count){
             if(i <= byte_count)
                 data[i++] = Wire.read();
         }
-            pi.set_data(data);
+            pi.set_data(data, byte_count-1);
     }
  
 };
