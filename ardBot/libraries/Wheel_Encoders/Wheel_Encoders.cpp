@@ -22,10 +22,11 @@ static unsigned char	m2B_prev_val;
 		unsigned char m2A_val = digitalRead(m2A_pin) == HIGH;
 		unsigned char m2B_val = digitalRead(m2B_pin) == HIGH;
 
-		char m1_plus = m1A_val ^ m1A_prev_val;
-		char m1_minus = m1B_val ^ m1B_prev_val;
-		char m2_plus = m2A_val ^ m2A_prev_val;
-		char m2_minus = m2B_val ^ m2B_prev_val;
+		
+		char m1_plus = m1A_val ^ m1B_prev_val;
+		char m1_minus = m1B_val ^ m1A_prev_val;
+		char m2_plus = m2A_val ^ m2B_prev_val;
+		char m2_minus = m2B_val ^ m2A_prev_val;
 
 		m1_clicks += m1_plus;
 		m1_clicks -= m1_minus;
@@ -58,14 +59,14 @@ static unsigned char	m2B_prev_val;
 		m2A_prev_val = digitalRead(m2A_pin) == HIGH;
 		m2B_prev_val = digitalRead(m2B_pin) == HIGH;
 
+
+		
 		attachInterrupt(digitalPinToInterrupt(m1A_pin),update,RISING);
-		attachInterrupt(digitalPinToInterrupt(m1A_pin),update,RISING);
-		attachInterrupt(digitalPinToInterrupt(m1A_pin),update,RISING);
-		attachInterrupt(digitalPinToInterrupt(m1A_pin),update,RISING);
+		//attachInterrupt(digitalPinToInterrupt(m1B_pin),update,RISING);
+		attachInterrupt(digitalPinToInterrupt(m2A_pin),update,RISING);
+		//attachInterrupt(digitalPinToInterrupt(m2B_pin),update,RISING);
 
 	}
-
-	
 
 	int Wheel_Encoders::get_m1_clicks(){
 		cli();
@@ -73,6 +74,7 @@ static unsigned char	m2B_prev_val;
 		sei();
 		return tmp;
 	}
+
 	int Wheel_Encoders::get_m2_clicks(){
 		cli();
 		int tmp = m2_clicks;
