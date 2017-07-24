@@ -6,6 +6,17 @@
 static int	m1_clicks;
 static int	m2_clicks;
 
+static Adafruit_DCMotor * m1;
+static Adafruit_DCMotor * m2;
+static int prev_clicks;
+static bool record_1;
+static bool record_2;
+static bool check_1;
+static bool check_2;
+static int click_diff_1;
+static int click_diff_2;
+
+
 static unsigned int m1A_pin;
 static unsigned int m1B_pin;
 static unsigned int m2A_pin;
@@ -37,6 +48,35 @@ static unsigned char	m2B_prev_val;
 		m1B_prev_val = m1B_val;
 		m2A_prev_val = m1A_val;
 		m2B_prev_val = m2B_val;
+
+		if(record_1){
+			prev_clicks = get_m1_clicks()
+			recoord_1 = false;
+			check_1 = true;
+		}
+
+		if(record_2){
+			prev_clicks = get_m2_clicks()
+			recoord_2 = false;
+			check_2 = true
+		}
+		if(check_1){
+			if(prev_clicks-get_m1_clicks() >= click_diff_1){
+				m1 -> run(RELEASE)
+				check_1 = false
+			}
+		}
+
+		if(check_2){
+			if(get_m2_clicks()-get_m2_clicks() >= click_diff_2){
+				m2 -> run(RELEASE)
+				check_2 = false;
+			}
+		}
+
+
+		
+
 	}
 
 	Wheel_Encoders::Wheel_Encoders(unsigned int m1A, unsigned int m1B, unsigned int m2A, unsigned int m2B){
@@ -61,10 +101,13 @@ static unsigned char	m2B_prev_val;
 
 
 		
-		attachInterrupt(digitalPinToInterrupt(m1A_pin),update,RISING);
-		//attachInterrupt(digitalPinToInterrupt(m1B_pin),update,RISING);
-		attachInterrupt(digitalPinToInterrupt(m2A_pin),update,RISING);
-		//attachInterrupt(digitalPinToInterrupt(m2B_pin),update,RISING);
+		attachInterrupt(digitalPinToInterrupt(m1A_pin),update,CHANGE);
+		attachInterrupt(digitalPinToInterrupt(m1B_pin),update,CHANGE);
+		attachInterrupt(digitalPinToInterrupt(m2A_pin),update,CHANGE);
+		attachInterrupt(digitalPinToInterrupt(m2B_pin),update,CHANGE);
+
+		record_1 = false;
+		record_2 = false;
 
 	}
 
