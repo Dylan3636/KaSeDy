@@ -1,5 +1,5 @@
 import numpy as np
-
+from Map import Map
 '''Basic filter for estimating discrete states.'''
 
 
@@ -10,27 +10,43 @@ class DiscreteBayesFilter:
         self.posterior = np.reshape(initial_probabilities,[len(initial_probabilities),1])  # Nx1 matrix describing the probability of being in each of the N states.
 
     def update(self,action,sensor_reading):
-        transition_probabilities = np.matrix(self.transition_model(action))  # NxN numpy matrix describing the probabilities of trasnsitioning from one state to the next.
+        transition_probabilities = np.matrix(self.transition_model(action)).transpose()  # NxN numpy matrix describing the probabilities of trasnsitioning from one state to the next.
         bel_bar = np.dot(transition_probabilities,self.posterior)
         sensor_prob = np.array(self.sensor_model(sensor_reading)) # Probabilities of seeing the sensor reading in the given states P(z|X)
         sensor_prob=sensor_prob.reshape([len(sensor_prob),1])
-        temp = np.multiply(bel_bar,sensor_prob)
-        self.posterior = temp/np.sum(temp)
+        temp = np.multiply(bel_bar,sensor_prob).tolist()
+        self.posterior = np.array(temp/np.sum(temp))
         return self.posterior
 
 def test():
-    bf = DiscreteBayesFilter(basic_transition_model,basic_sensor_model,np.asarray([1,1,1],dtype=float)/3)
-    print('Starting Bayes Filter test... (Press q to quit.)')
-    print('List of actions: L & R')
-    print('List of sensor readings: R, B & Y')
+    map = Map.random_grid_map(3, 5)
+    transition_model = map.get_transition_model()
+    sensor_model = map.get_sensor_model()
+    initial_belief = np.asarray(np.ones(map.num_states),dtype=float)/map.num_states
+    bf = DiscreteBayesFilter(transition_model, sensor_model, initial_belief)
+    print('Starting Bayes Filter map test... (Press q to quit.)')
+    print('List of actions: N,S,W,E')
+    print('List of sensor readings: {}'.format(np.unique(map.colour_map)))
+    prev_state = np.random.choice(xrange(map.num_states))
+    map.show(initial_belief, prev_state)
     while True:
         action = raw_input('Enter action: ')
         if action == 'q':
             break
-        senor_reading = raw_input('Enter senor reading: ')
-        if senor_reading == 'q':
-            break
-        print bf.update(action.strip().capitalize(),senor_reading.strip().capitalize())
+
+        tmp = transition_model(action)
+        state = np.random.choice(xrange(map.num_states),p=tmp[prev_state])
+        sensor_reading = map.colour_map[state]
+        print 'Sensor sees {}'.format(sensor_reading)
+        #senor_reading = raw_input('Enter sensor reading: ')
+        #if senor_reading == 'q':
+        #    break
+        belief = bf.update(action.strip().capitalize(), sensor_reading)
+        print tmp[prev_state]
+        print sensor_model(sensor_reading)
+        print belief
+        map.show(belief, state)
+        prev_state = state
 
 def basic_transition_model(action):
     '''Basic example: 3 states labelled 1,2 and 3 on a 1 D plane. Agent can only move left (L) or right (R) with some noise.
