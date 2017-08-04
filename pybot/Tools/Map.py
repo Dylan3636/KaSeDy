@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 class Map:
     def __init__(self, full_connections, colour_map,pos=None, state_labels =None):
+        plt.ion()
         self.full_connections = full_connections
         split = [[list(l) for l in zip(*temp)] for temp in full_connections]
         connections= []
@@ -37,7 +38,8 @@ class Map:
     def colour_of(self, node):
         return self.colour_map[node]
 
-    def show(self,node_weights=None,actual_state =None):
+    def show(self,node_weights=None,actual_state=None, delay=0):
+        plt.close()
         edges = []
         if node_weights is None:
             node_weights = np.ones(self.num_states)
@@ -67,6 +69,8 @@ class Map:
         # nx.draw_networkx_labels(G,labels=range(1, len(self.colour_map)))
         plt.title('Map')
         plt.show()
+        plt.pause(delay)
+        plt.close()
 
     def get_transition_model(self, noise =0.2):
         model = dict()

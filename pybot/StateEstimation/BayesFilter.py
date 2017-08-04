@@ -1,5 +1,9 @@
 import numpy as np
-from Map import Map
+import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath('..//Tools//')))
+
+from Tools.Map import Map
 '''Basic filter for estimating discrete states.'''
 
 
@@ -42,9 +46,9 @@ def test():
         #if senor_reading == 'q':
         #    break
         belief = bf.update(action.strip().capitalize(), sensor_reading)
-        print tmp[prev_state]
-        print sensor_model(sensor_reading)
-        print belief
+        #print tmp[prev_state]
+        #print sensor_model(sensor_reading)
+        #print belief
         map.show(belief, state)
         prev_state = state
 
