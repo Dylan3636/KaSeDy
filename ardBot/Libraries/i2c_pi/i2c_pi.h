@@ -2,6 +2,8 @@
 #define _I2C_PI_H_
 
 #include <Wire.h>
+#include <Wheel_Encoders.h>
+#include <Motor_Control.h>
 
 class i2c_pi{
 private:
@@ -9,6 +11,7 @@ private:
     bool on = false;
     int SLAVE_ADDRESSS = 0x04;
     int * data = nullptr;
+    Wheel_Encoders * encoders = nullptr;
 public:
     i2c_pi();
     ~i2c_pi();
@@ -18,6 +21,9 @@ public:
     void set_data(int val[], int pos);
     int get_operation();
     int set_operation(int val);
+    void set_encoders(Wheel_Encoders* enc);
+    void command_motors(int* data, Motor_Control motors, int speed);
+    void receive_data(int byte_count);
 };
 
 class i2c_pi_with_arg: public i2c_pi{
@@ -26,6 +32,8 @@ private:
     bool on = false;
     int SLAVE_ADDRESSS = 0x04;
     int * data =  nullptr;
+    Wheel_Encoders * encoders = nullptr;
+
 public:
     i2c_pi_with_arg(int addr);
 };

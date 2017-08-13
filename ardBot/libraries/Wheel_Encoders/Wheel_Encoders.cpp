@@ -1,5 +1,6 @@
 #include "Wheel_Encoders.h"
 #include <Arduino.h>
+#include <Adafruit_MotorShield.h>
 
 
 
@@ -27,13 +28,12 @@ static unsigned char	m1B_prev_val;
 static unsigned char	m2A_prev_val;
 static unsigned char	m2B_prev_val;
 
-	void update(){
+	void Wheel_Encoders::update(){
 		unsigned char m1A_val = digitalRead(m1A_pin) == HIGH;
 		unsigned char m1B_val = digitalRead(m1B_pin) == HIGH;
 		unsigned char m2A_val = digitalRead(m2A_pin) == HIGH;
 		unsigned char m2B_val = digitalRead(m2B_pin) == HIGH;
 
-		
 		char m1_plus = m1A_val ^ m1B_prev_val;
 		char m1_minus = m1B_val ^ m1A_prev_val;
 		char m2_plus = m2A_val ^ m2B_prev_val;
@@ -46,30 +46,30 @@ static unsigned char	m2B_prev_val;
 		
 		m1A_prev_val = m1A_val;
 		m1B_prev_val = m1B_val;
-		m2A_prev_val = m1A_val;
+		m2A_prev_val = m2A_val;
 		m2B_prev_val = m2B_val;
 
 		if(record_1){
-			prev_clicks = get_m1_clicks()
-			recoord_1 = false;
+			prev_clicks = get_m1_clicks();
+			record_1 = false;
 			check_1 = true;
 		}
 
 		if(record_2){
-			prev_clicks = get_m2_clicks()
-			recoord_2 = false;
-			check_2 = true
+			prev_clicks = get_m2_clicks();
+			record_2 = false;
+			check_2 = true;
 		}
 		if(check_1){
 			if(prev_clicks-get_m1_clicks() >= click_diff_1){
-				m1 -> run(RELEASE)
-				check_1 = false
+				m1 -> run(RELEASE);
+				check_1 = false;
 			}
 		}
 
 		if(check_2){
 			if(get_m2_clicks()-get_m2_clicks() >= click_diff_2){
-				m2 -> run(RELEASE)
+				m2 -> run(RELEASE);
 				check_2 = false;
 			}
 		}
@@ -102,13 +102,22 @@ static unsigned char	m2B_prev_val;
 
 		
 		attachInterrupt(digitalPinToInterrupt(m1A_pin),update,CHANGE);
-		attachInterrupt(digitalPinToInterrupt(m1B_pin),update,CHANGE);
+		//attachInterrupt(digitalPinToInterrupt(m1B_pin),update,CHANGE);
 		attachInterrupt(digitalPinToInterrupt(m2A_pin),update,CHANGE);
-		attachInterrupt(digitalPinToInterrupt(m2B_pin),update,CHANGE);
+		//attachInterrupt(digitalPinToInterrupt(m2B_pin),update,CHANGE);
 
 		record_1 = false;
 		record_2 = false;
 
+	}
+
+	int* Wheel_Encoders::get_clicks(){
+		int* clicks = new int[2];
+		cli();
+		clicks[0] = m1_clicks;
+		clicks[1] = m2_clicks;
+		sei();
+		return clicks;
 	}
 
 	int Wheel_Encoders::get_m1_clicks(){

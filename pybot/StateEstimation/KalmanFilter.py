@@ -7,7 +7,7 @@ plt.interactive(False)
 
 class KalmanFilter(object):
 
-    def __init__(self,N,h,A=None,B=None,H=None,Q=None,R=None):
+    def __init__(self, N, h, A=None, B=None, H=None, Q=None, R=None):
         self.N = N
         if A != None:
 
