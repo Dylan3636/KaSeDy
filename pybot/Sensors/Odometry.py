@@ -31,7 +31,7 @@ class Odometer:
 if __name__ == '__main__':
     import os
     import sys
-    sys.path.insert(0, '../KaSeDy/pybot/I2c')
+    sys.path.insert(0,os.path.abspath('../KaSeDy/pybot/I2c') )
     print sys.path
     from ..I2c.ardI2C import Arduino
     ard = Arduino()
