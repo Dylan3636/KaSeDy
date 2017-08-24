@@ -6,8 +6,8 @@ class Odometer:
     CLICK_GAIN = 0.1  # scale to convert the encoder counts (clicks) to cm
     RADIUS = 2  # radius of robot in cm
 
-    def __init__(self, arduino, init_x=[0, 0, 90], init_readings=np.array([0, 0])):
-        self.arduino = arduino
+    def __init__(self, ardI2c, init_x=[0, 0, 90], init_readings=np.array([0, 0])):
+        self.arduino = ardI2c
         self.x_previous = init_x
         self.previous_readings = init_readings
 
@@ -28,5 +28,10 @@ class Odometer:
         self.previous_readings = readings
         return x, x_prev
 
-
+if __name__ == '__main__':
+    from I2c.ardI2C import ardI2C
+    ard = ardI2C()
+    odom = Odometer(ard)
+    while True:
+        print odom.update()
 
