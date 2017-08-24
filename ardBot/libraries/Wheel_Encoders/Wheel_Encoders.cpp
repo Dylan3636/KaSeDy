@@ -112,11 +112,16 @@ static unsigned char	m2B_prev_val;
 	}
 
 	int* Wheel_Encoders::get_clicks(){
+		//Serial.println("here1");
 		int* clicks = new int[2];
-		cli();
+		//Serial.println("here2");
+		//cli();
+		//Serial.println("here3");
 		clicks[0] = m1_clicks;
 		clicks[1] = m2_clicks;
-		sei();
+		//Serial.println("here4");
+		//sei();
+		//Serial.println("here5");
 		return clicks;
 	}
 

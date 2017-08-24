@@ -69,6 +69,10 @@ void i2c_pi::command_motors(int* data, Motor_Control motors, int speed){
 
 
 void i2c_pi::receive_data(int byte_count ){
+    Wire.read();
+    if (! Wire.available()){
+        return;
+    }
     int * data = get_data();
     
     if(data !=  nullptr){
@@ -78,7 +82,8 @@ void i2c_pi::receive_data(int byte_count ){
     
     data = new int[byte_count];
     set_operation(Wire.read()); // internal address read from Wire
-    
+    Serial.println(get_operation());
+
     if (get_operation() == 0x00){
     
         set_on(Wire.read()==1);
@@ -86,10 +91,10 @@ void i2c_pi::receive_data(int byte_count ){
         }
     
     else if(get_operation() == 0x05) {
-
+        while(Wire.available()){Wire.read();}
         Wire.beginTransmission(SLAVE_ADDRESSS);
         
-        if (encoders != nullptr){
+        if (encoders == nullptr){
             Wire.write(-1); //Encoders not set
 
         }
@@ -97,14 +102,18 @@ void i2c_pi::receive_data(int byte_count ){
             int* readings = encoders -> get_clicks();
             int m1_count = readings[0];
             int m2_count = readings[1];
+            //int tmp[2] = {m1_count, m2_count};
+            Wire.write(0x05);
             Wire.write(m1_count);
+            //Wire.send(m1_count);
             Wire.write(m2_count);
+            Serial.println(m2_count);
             delete[] readings;
         }
        
-        Wire.endTransmission();
-        while(Wire.available()){Wire.read();} return;
-
+        int val = Wire.endTransmission();
+        Serial.println(val);
+        return;
     }
     else{
         int i = 0;

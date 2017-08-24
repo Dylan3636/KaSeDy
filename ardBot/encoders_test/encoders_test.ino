@@ -14,14 +14,15 @@ Wheel_Encoders we = Wheel_Encoders(ind_1, ind_2, ind_3, ind_4);
 Motor_Control mc = Motor_Control(m1, m2);
 
 
-
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  Wire.begin(0x04);
   AFMS.begin();
   Serial.println("Beginning Encoder Test...");
   mc.forward_forever(200);
   mc.halt();
+  Wire.onRequest(request_data);
   //pinMode(0,INPUT);
   //pinMode(1,INPUT);
   //pinMode(2,INPUT);
@@ -45,5 +46,13 @@ void loop() {
     
     
   delay(1000);
+}
+
+void request_data(){
+  int num = 1000;
+  Wire.write(num & 0xFF);
+  Wire.write((num >> 8) & 0xFF);
+  Wire.write((num >> 16) & 0xFF);
+  Wire.write((num >> 24) & 0xFF);
 }
 
