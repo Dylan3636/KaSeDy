@@ -14,15 +14,18 @@ class Arduino():
         return self.bus.read_byte(self.address)
 
     def get_encoder_readings(self):
-        self.talk([0x05])
+        #self.talk([0x05])
         #sleep(0.01)
-	readings = []
-	#readings.append(self.bus.read_byte_data(self.address,0x05))
+        readings = []
+        #readings.append(self.bus.read_byte_data(self.address,0x05))
         #readings.append(self.bus.read_byte_data(self.address, 0x05))
-	#readings.append(self.listen())
-	readings = self.bus.read_i2c_block_data(self.address,0)
-	
-        return readings
+        #readings.append(self.listen())
+        readings = self.bus.read_i2c_block_data(self.address,0)
+        reading = long(readings[0])
+        reading |= readings[0] << 8
+        reading |= readings[0] << 16;
+        reading |= readings[0] << 24;
+        return reading
 
 
 def test():
