@@ -29,8 +29,8 @@ class Odometer:
         return x, x_prev
 
 if __name__ == '__main__':
-    from I2c import ardI2c
-    ard = ardI2c.Arduino()
+    from I2c.ardI2C import Arduino
+    ard = Arduino()
     odom = Odometer(ard)
     while True:
         print odom.update()
