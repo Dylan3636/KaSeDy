@@ -49,7 +49,17 @@ void loop() {
 }
 
 void request_data(){
-  int num = 1000;
+  int* ind = we.get_clicks();
+
+  //Sending 1st encoder reading
+  int num = ind[0];
+  Wire.write(num & 0xFF);
+  Wire.write((num >> 8) & 0xFF);
+  Wire.write((num >> 16) & 0xFF);
+  Wire.write((num >> 24) & 0xFF);
+
+  //Sending 2nd encoder reading
+  num = ind[1];
   Wire.write(num & 0xFF);
   Wire.write((num >> 8) & 0xFF);
   Wire.write((num >> 16) & 0xFF);
