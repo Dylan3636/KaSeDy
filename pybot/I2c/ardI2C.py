@@ -20,11 +20,11 @@ class Arduino():
         #readings.append(self.bus.read_byte_data(self.address,0x05))
         #readings.append(self.bus.read_byte_data(self.address, 0x05))
         #readings.append(self.listen())
-        readings = self.bus.read_i2c_block_data(self.address,0)
-        reading = long(readings[0])
-        reading |= readings[0] << 8
-        reading |= readings[0] << 16;
-        reading |= readings[0] << 24;
+        readings = self.bus.read_i2c_block_data(self.address,0,4)
+        reading = readings[0]
+        reading |= readings[1] << 8
+        reading |= readings[2] << 16;
+        reading |= readings[3] << 24;
         return reading
 
 
