@@ -19,10 +19,10 @@ void setup() {
   Serial.begin(9600);
   Wire.begin(0x04);
   AFMS.begin();
-  Serial.println("Beginning Encoder Test...");
-  mc.forward_forever(200);
-  mc.halt();
   Wire.onRequest(request_data);
+  Serial.println("Beginning Encoder Test...");
+  mc.forward_forever(150);
+  mc.halt();
   //pinMode(0,INPUT);
   //pinMode(1,INPUT);
   //pinMode(2,INPUT);
@@ -32,14 +32,14 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   //Serial.print("Motor 1: ");
-  Serial.println(we.get_m1_clicks());
+  //Serial.println(we.get_m1_clicks());
   //Serial.print(digitalRead(ind_1));
   //Serial.print('\t');
   //Serial.println(digitalRead(ind_2));
     
     
   //Serial.print("Motor 2: ");
-  Serial.println(we.get_m2_clicks());
+  //Serial.println(we.get_m2_clicks());
   //Serial.print(digitalRead(ind_3));
   //Serial.print('\t');
   //Serial.println(digitalRead(ind_4));

@@ -59,7 +59,7 @@ class OCMCL:
             p = x + deltaTrans * h1
             q = y + deltaTrans * h2
             r = theta + deltaRot1 + deltaRot2
-            return [p,q,r]
+            return [p, q, r]
         else:
             (xbar, _, _, x_bar_prime,) = u
             (x, y, theta,) = self.mcl.particles

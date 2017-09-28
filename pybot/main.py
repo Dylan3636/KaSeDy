@@ -1,6 +1,6 @@
 from time import sleep
 
-from Sensors import LSM6DS33
+from sensors import LSM6DS33
 
 
 def main():

@@ -125,6 +125,29 @@ void i2c_pi::receive_data(int byte_count ){
     }
 
 }
+void request_data(Wheel_Encoders we, QTRSensorsAnalog qtra){
+    if(get_operation()==0x05){
+        int* ind = we.get_clicks();
+
+          //Sending 1st encoder reading
+        int num = ind[0];
+        Wire.write(num & 0xFF);
+        Wire.write((num >> 8) & 0xFF);
+        Wire.write((num >> 16) & 0xFF);
+        Wire.write((num >> 24) & 0xFF);
+
+          //Sending 2nd encoder reading
+        num = ind[1];
+        Wire.write(num & 0xFF);
+        Wire.write((num >> 8) & 0xFF);
+        Wire.write((num >> 16) & 0xFF);
+        Wire.write((num >> 24) & 0xFF);
+    }
+    else if(get_operation()==0x06){
+        qtra
+
+    }
+}
 
 
 //i2c_pi_with_arg

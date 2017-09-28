@@ -24,6 +24,7 @@ public:
     void set_encoders(Wheel_Encoders* enc);
     void command_motors(int* data, Motor_Control motors, int speed);
     void receive_data(int byte_count);
+    void request_data();
 };
 
 class i2c_pi_with_arg: public i2c_pi{

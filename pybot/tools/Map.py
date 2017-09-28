@@ -2,6 +2,7 @@ import numpy as np
 from pandas import DataFrame
 import networkx as nx
 import matplotlib.pyplot as plt
+import pylab
 
 
 class Map:
@@ -32,14 +33,24 @@ class Map:
     def find_connections(self, node):
         return self.connections[node]
 
-    def is_connected(self, n1, n2):
-        return n2 in self.connections[n1]
+    def is_connected(self, n1, n2, bilateral=False):
+        b = n2 in self.connections[n1]
+        if bilateral:
+            b = n2 in self.connections[n1] or n1 in self.connections[n2]
+        return b
+
+    def has_path(self, n1, n2):
+        try:
+            b= nx.has_path(self.G, n1, n2)
+        except:
+            b = False
+        return b
 
     def colour_of(self, node):
         return self.colour_map[node]
 
-    def show(self,node_weights=None,actual_state=None, delay=0):
-        plt.close()
+    def show(self,node_weights=None, actual_state=None, orientation=None, delay=0, title ='Map', show=1, save=0, save_title='Default', fig = plt.figure(), figsize=(7.5,6), ax=None):
+        ax.cla()
         edges = []
         if node_weights is None:
             node_weights = np.ones(self.num_states)
@@ -57,56 +68,107 @@ class Map:
         #print pos
         for i in range(0, len(self.colour_map)):
             if i != actual_state or actual_state is None:
-                nx.draw_networkx_nodes(G, pos, nodelist=[i], node_color=[self.colour_map[i]],node_size= node_weights[i]*1000)
-                nx.draw_networkx_labels(G, pos, labels={i : self.state_labels[i]})
+                nx.draw_networkx_nodes(G, pos, nodelist=[i], node_color=[self.colour_map[i]],node_size= node_weights[i]*1000, ax=ax)
+                nx.draw_networkx_labels(G, pos, labels={i : self.state_labels[i]}, ax=ax)
             else:
-                nx.draw_networkx_nodes(G, pos, nodelist=[i], node_color=[self.colour_map[i]],
-                                       node_size=node_weights[i] * 1000, node_shape='x')
-                nx.draw_networkx_labels(G, pos, labels={i: 'Current state'})
-        nx.draw_networkx_edges(G, pos)
+                if orientation is None:
+                    nx.draw_networkx_nodes(G, pos, nodelist=[i], node_color=[self.colour_map[i]],
+                                           node_size=node_weights[i] * 1000, node_shape='x', ax=ax)
+                    nx.draw_networkx_labels(G, pos, labels={i: 'Current state'}, ax=ax)
+                else:
+                    markers = np.array(['<','^','>','v'])
+                    nx.draw_networkx_nodes(G, pos, nodelist=[i], node_color=[self.colour_map[i]],
+                                           node_size=node_weights[i] * 1000, node_shape=markers[orientation], ax=ax)
+                    nx.draw_networkx_labels(G, pos, labels={i: 'Current state'}, ax=ax)
+
+        nx.draw_networkx_edges(G, pos,ax=ax)
         # print edges
         # nx.draw(G)
         # nx.draw_networkx_labels(G,labels=range(1, len(self.colour_map)))
-        plt.title('Map')
-        plt.show()
-        plt.pause(delay)
-        plt.close()
+        ax.set_title(title)
+        if save:
+            plt.savefig('Media/'+save_title)
+            fig.set_size_inches(figsize[0], figsize[1])
+        if show:
+            pylab.draw()
+            fig.set_size_inches(figsize[0], figsize[1])
+            plt.pause(delay)
 
-    def get_transition_model(self, noise =0.2):
-        model = dict()
+
+
+    def get_transition_model(self, noise =0.2, noise_type=0):
         num_states = len(self.colour_map)
+        model = {
+            'N': np.zeros([num_states, num_states]),
+            'S': np.zeros([num_states, num_states]),
+            'W': np.zeros([num_states, num_states]),
+            'E': np.zeros([num_states, num_states]),
+        }
         for i, connections in enumerate(self.connections):
             for j, connection in enumerate(connections):
-                card = self.direction_map[i][j]
-
-                if model.has_key(card):
-                    model[card][i, connection] = 1
-                else:
-                    model[card] = np.zeros([num_states, num_states])
+                    card = self.direction_map[i][j]
                     model[card][i, connection] = 1
 
-                flipped_card = self.flip_cardinal(card)
-                if model.has_key(flipped_card):
-                    model[flipped_card][connection, i] = 1
-                else:
-                    model[flipped_card] = np.zeros([num_states, num_states])
+                    flipped_card = self.flip_cardinal(card)
                     model[flipped_card][connection, i] = 1
 
-        for k, df in model.iteritems():
+        for k, df in model.items():
             mat = model[k]
 
-            for i in xrange(num_states):
+            for i in range(num_states):
                 if np.all(mat[i,:] == 0):
-                    mat[i,i] = 1
-            mat = [[col-noise if col == 1 else noise/(num_states-np.sum(row ==1))for col in row]for row in mat.tolist()]
+                    mat[i, i] = 1
+            tmp2 =[]
+            for row in mat.tolist():
+                tmp = []
+                for i, col in enumerate(row):
+                    if noise_type==0:
+                        if col==1:
+                            tmp.append(col-noise)
+                        elif self.is_connected( np.argmax(row), i, True):
+                            tmp.append(noise / 3)
+                        else:
+                            tmp.append(0)
+                    elif noise_type==1:
+                        if col == 1:
+                            tmp.append(col - noise)
+                        else:
+                            tmp.append(noise/(num_states-1))
+                tmp2.append(tmp)
+            mat = tmp2
+            #mat = [[col-noise if col == 1 else  if ) else 0) for col in row] for row in mat.tolist()]
 
-            for i in xrange(num_states):
+            for i in range(num_states):
                 mat[i] = mat[i]/np.sum(mat[i])
 
             model[k] = mat
         f = lambda x: model[x]
         #print model
         return f
+
+    def get_sensor_readings(self, position, orientation):
+        readings = np.zeros(4)
+        for connection in self.full_connections[position]:
+            if connection[0] == 'N':
+                readings[1] = 1
+            if connection[0] == 'E':
+                readings[2] = 1
+        try:
+            for connection in self.full_connections[position-1]:
+                if connection[1] == position and connection[0] == 'E':
+                    readings[0] = 1
+        except:
+            print(position-1)
+        try:
+            for i in range(position):
+                for connection in self.full_connections[i]:
+                    if connection[1] == position and connection[0] == 'N':
+                        readings[3] = 1
+                        break
+        except:
+            print(self.num_states)
+
+        return np.array(readings[[orientation-1, orientation, (orientation+1) % 4]])
 
     def get_sensor_model(self, noise=0.2):
         num_states = len(self.colour_map)
@@ -116,7 +178,7 @@ class Map:
 
     @staticmethod
     def flip_cardinal(card):
-        d = dict([('N','S'),('S','N'),('W','E'),('E','W')])
+        d = dict([('N', 'S'), ('S', 'N'), ('W', 'E'), ('E', 'W')])
         return d[card]
 
     def get_pos(self):
@@ -148,7 +210,7 @@ class Map:
         #length = max(length, 2*np.floor(np.sqrt(num_nodes)))
         full_connections = []
         pos = []
-        for j in range(0,length):
+        for j in range(0, length):
             for i in range(0, length):
                 st = set()
                 cardinals = np.random.choice(['N', 'E', 'D'], 2, replace=False)
@@ -193,8 +255,8 @@ def test():
     #print map.direction_map
     f = map.get_transition_model()
     g = map.get_sensor_model()
-    print f('S')
-    print g('R')
+    print(f('S'))
+    print(g('R'))
     #map.show()
     #print nx.has_path(map.G, 0, 35)
 

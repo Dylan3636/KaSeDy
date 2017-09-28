@@ -24,7 +24,7 @@ class KalmanFilter(object):
         self.P = np.zeros(self.N) #a posteriori error estimate (covariance matrix)
 
     def updateStateBelief(self,u,z,A=None,B=None,H=None,Q=None,R=None):
-        """Updating state belief using u (lx1 control vector) and z (hx1 observation vector)"""
+        """Updating state belief using u (lx1 control vector) and z (hx1 previous_observation vector)"""
         #Time Update "Predict"
         if A==None:
             (A,B,H,Q,R) = (self.A,self.B,self.H,self.Q,self.R)
@@ -46,7 +46,7 @@ class KalmanFilter(object):
     def stateProb(self):
         return multivariate_normal.pdf(self.x_hat,self.x_hat,self.P)
 
-    class AGOKalmanFilter():
+    class AGOKalmanFilter:
 
         def __init__(self, odom, imu, alphas=[0.1, 0.1, 0.1, 0.1], sample=False):
             self.odom = odom
