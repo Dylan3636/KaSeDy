@@ -7,7 +7,6 @@ import pylab
 
 class Map:
     def __init__(self, full_connections, colour_map,pos=None, state_labels =None):
-        plt.ion()
         self.full_connections = full_connections
         split = [[list(l) for l in zip(*temp)] for temp in full_connections]
         connections= []
@@ -49,7 +48,8 @@ class Map:
     def colour_of(self, node):
         return self.colour_map[node]
 
-    def show(self,node_weights=None, actual_state=None, orientation=None, delay=0, title ='Map', show=1, save=0, save_title='Default', fig = plt.figure(), figsize=(7.5,6), ax=None):
+    def show(self,node_weights=None, actual_state=None, orientation=None, delay=0, title ='Map', show=1, save=0, save_title='Default', fig = None, figsize=(7.5,6), ax=None):
+        plt.ion()
         ax.cla()
         edges = []
         if node_weights is None:
@@ -88,10 +88,12 @@ class Map:
         ax.set_title(title)
         if save:
             plt.savefig('Media/'+save_title)
-            fig.set_size_inches(figsize[0], figsize[1])
+            if fig is not None:
+                fig.set_size_inches(figsize[0], figsize[1])
         if show:
             pylab.draw()
-            fig.set_size_inches(figsize[0], figsize[1])
+            if fig is not None:
+                fig.set_size_inches(figsize[0], figsize[1])
             plt.pause(delay)
 
 
