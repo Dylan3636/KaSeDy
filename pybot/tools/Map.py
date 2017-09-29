@@ -50,7 +50,8 @@ class Map:
 
     def show(self,node_weights=None, actual_state=None, orientation=None, delay=0, title ='Map', show=1, save=0, save_title='Default', fig = None, figsize=(7.5,6), ax=None):
         plt.ion()
-        ax.cla()
+        if ax is not None:
+            ax.cla()
         edges = []
         if node_weights is None:
             node_weights = np.ones(self.num_states)
@@ -85,7 +86,8 @@ class Map:
         # print edges
         # nx.draw(G)
         # nx.draw_networkx_labels(G,labels=range(1, len(self.colour_map)))
-        ax.set_title(title)
+        if ax is not None:
+            ax.set_title(title)
         if save:
             plt.savefig('Media/'+save_title)
             if fig is not None:
