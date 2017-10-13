@@ -48,13 +48,21 @@ class Map:
     def colour_of(self, node):
         return self.colour_map[node]
 
+    def init_G(self):
+        edges = []
+        for i in range(0, np.size(self.connections, 0)):
+            for j in range(0, np.size(self.connections[i], 0)):
+                edges.append((i, self.connections[i][j]))
+        self.G.add_edges_from(edges)
+
+
     def show(self,node_weights=None, actual_state=None, orientation=None, delay=0, title ='Map', show=1, save=0, save_title='Default', fig = None, figsize=(7.5,6), ax=None):
         plt.ion()
         if ax is not None:
             ax.cla()
-        edges = []
         if node_weights is None:
             node_weights = np.ones(self.num_states)
+        edges = []
         for i in range(0, np.size(self.connections, 0)):
             for j in range(0, np.size(self.connections[i], 0)):
                 edges.append((i, self.connections[i][j]))
@@ -65,8 +73,7 @@ class Map:
             self.pos = pos
         else:
             pos = self.pos
-        #print nx.random_layout(G)
-        #print pos
+
         for i in range(0, len(self.colour_map)):
             if i != actual_state or actual_state is None:
                 nx.draw_networkx_nodes(G, pos, nodelist=[i], node_color=[self.colour_map[i]],node_size= node_weights[i]*1000, ax=ax)
@@ -82,7 +89,7 @@ class Map:
                                            node_size=node_weights[i] * 1000, node_shape=markers[orientation], ax=ax)
                     nx.draw_networkx_labels(G, pos, labels={i: 'Current state'}, ax=ax)
 
-        nx.draw_networkx_edges(G, pos,ax=ax)
+        nx.draw_networkx_edges(G, pos, ax=ax)
         # print edges
         # nx.draw(G)
         # nx.draw_networkx_labels(G,labels=range(1, len(self.colour_map)))
@@ -205,19 +212,22 @@ class Map:
         return pos
 
     @staticmethod
-    def random_grid_map(num_colours, length):
-        full_connections, colour_map, pos = Map.random_grid_connections(num_colours, length)
+    def random_grid_map(num_colours, length, random_state=None):
+        full_connections, colour_map, pos = Map.random_grid_connections(num_colours, length, random_state=random_state)
         return Map(full_connections, colour_map, pos)
 
     @staticmethod
-    def random_grid_connections(num_colours, length=10):
+    def random_grid_connections(num_colours, length=10, random_state=None):
         #length = max(length, 2*np.floor(np.sqrt(num_nodes)))
         full_connections = []
         pos = []
         for j in range(0, length):
             for i in range(0, length):
                 st = set()
-                cardinals = np.random.choice(['N', 'E', 'D'], 2, replace=False)
+                if random_state is None:
+                    cardinals = np.random.choice(['N', 'E', 'D'], 2, replace=False)
+                else:
+                    cardinals = random_state.choice(['N', 'E', 'D'], 2, replace=False)
                 for card in cardinals:
                     if card == 'N' and j < length-1:
                         st.add((card, (j+1)*length+i))
@@ -225,10 +235,13 @@ class Map:
                         st.add((card, j*length+i+1))
                 full_connections.append(list(st))
                 pos.append((i, j))
-        colour_map = np.random.choice(['Y', 'B', 'R', 'G', 'O'][0:num_colours], length**2,replace=True)
+        if random_state is None:
+            colour_map = np.random.choice(['Y', 'B', 'R', 'G', 'O'][0:num_colours], length**2,replace=True)
+        else:
+            colour_map = random_state.choice(['Y', 'B', 'R', 'G', 'O'][0:num_colours], length**2,replace=True)
+
 
         return full_connections, colour_map, pos
-
 
     @staticmethod
     def random_connections(num_nodes, num_colours):
