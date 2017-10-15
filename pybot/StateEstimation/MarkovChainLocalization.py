@@ -31,7 +31,7 @@ class OCMCL:
         self.map = map
         self.colour_sensor = colour_sensor
         self.one_dim = len(state_space)==1
-        self.mcl = MCL(state_space,num_particles,self.odom_sample_motion_model,self.color_sensor_model,initial_particles)
+        self.mcl = MCL(state_space,num_particles,self.odom_sample_motion_model,self.colour_sensor_model,initial_particles)
 
     def odom_sample_motion_model(self,u):
         if not self.one_dim:

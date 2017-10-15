@@ -18,8 +18,8 @@ class KalmanFilter(object):
         if H != None:
             self.H = np.array(H) #hxN sensor matrix
 
-        self.h = np.size(h, 0)
-        self.K = np.zeros([self.N,self.h])  #Kalman Gain Nxh matrix
+        self.h = h
+        self.K = np.zeros([self.N, self.h])  #Kalman Gain Nxh matrix
         self.x_hat = np.zeros([self.N,1]) # a posteriori estimate of current state
         self.P = np.zeros(self.N) #a posteriori error estimate (covariance matrix)
 
@@ -104,22 +104,23 @@ class KalmanFilter(object):
 
 
 def main():
+    pw=1
     A = [1]
     B = A
     H = [1]
-    Q = 1e-5
-    R = 0.1**2
-    kf = KalmanFilter(A,B,H,Q,R)
+    Q = 1e-3
+    R = 0.1**1
+    kf = KalmanFilter(1,1,A,B,H,Q,R)
     x = -0.3
     x_hat = np.zeros([100,1])
     z = np.zeros([100,1])
     for i in range(0,100):
-        z[i] = np.random.normal(i**2, 100)
+        z[i] = np.random.normal(i**pw, 100)
         x_hat[i]=kf.updateStateBelief(0,z[i])
     plt.figure()
     plt.plot(z, 'k+', label='noisy measurements')
     plt.plot(x_hat, 'b-', label='a posteri estimate')
-    plt.plot(np.square(range(0,100)), 'g-', label='truth value')
+    plt.plot(np.power(range(0,100), pw), 'g-', label='truth value')
     #plt.axhline(x, color='g', label='truth value')
     plt.legend()
     plt.title('Estimate vs. iteration step', fontweight='bold')

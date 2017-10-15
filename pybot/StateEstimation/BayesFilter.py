@@ -1,9 +1,9 @@
-import numpy as np
 import os
 import sys
-sys.path.insert(0, os.path.dirname(os.path.abspath('..//tools//')))
-
-from tools.Map import Map
+import numpy as np
+import matplotlib.pyplot as plt
+sys.path.insert(0, os.path.dirname(os.path.abspath('..//..//..//Machine_Learning//ReinforcementLearning//environments')))
+from environments.random_maze.Map import Map
 '''Basic filter for estimating discrete states.'''
 
 
@@ -41,7 +41,8 @@ def test():
     print('List of actions: N,S,W,E')
     print('List of sensor readings: {}'.format(np.unique(map.colour_map)))
     prev_state = np.random.choice(range(map.num_states))
-    map.show(initial_belief, prev_state)
+    ax = plt.subplot(111)
+    map.show(initial_belief, prev_state, ax=ax, show=True, delay=0.4)
     while True:
         action = input('Enter action: ')
         if action == 'q':
@@ -50,15 +51,13 @@ def test():
         tmp = transition_model(action)
         state = np.random.choice(range(map.num_states),p=tmp[prev_state])
         sensor_reading = map.colour_map[state]
-        print('Sensor sees {}'.format(sensor_reading))
-        #senor_reading = raw_input('Enter sensor reading: ')
-        #if senor_reading == 'q':
-        #    break
+        if sensor_reading == 'q':
+            break
         belief = bf.update(action.strip().capitalize(), sensor_reading)
-        #print tmp[prev_state]
-        #print sensor_model(sensor_reading)
-        #print belief
-        map.show(belief, state)
+        print(tmp[prev_state])
+        print(sensor_model(sensor_reading))
+        print(belief)
+        map.show(belief, state, ax=ax, show=False)
         prev_state = state
 
 def basic_transition_model(action):

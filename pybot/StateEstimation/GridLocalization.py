@@ -2,7 +2,7 @@ import numpy as np
 from scipy.stats import multivariate_normal
 
 class GridLocalization:
-    'Basic GridLocalization Algorithm'
+    """Basic GridLocalization Algorithm"""
     def __init__(self, states, motion_model, sensor_model, initial_probs=None):
         self.states = states
         self.motion_model = motion_model
@@ -12,11 +12,11 @@ class GridLocalization:
         else:
             self.posterior = initial_probs
 
-    def update(self,u,reading):
-        trans_matrix = np.zeros(len(self.gl.states))
+    def update(self, u, reading):
+        trans_matrix = np.zeros(len(self.states))
 
-        for i, state in enumerate(self.gl.states):
-            trans_matrix[i] = self.motion_model(self.states,u,state)
+        for i, state in enumerate(self.states):
+            trans_matrix[i] = self.motion_model(self.states, u, state)
 
         bel_bar = np.dot(trans_matrix, self.posterior)
 
@@ -28,7 +28,7 @@ class GridLocalization:
 
 
 class OCGridLocalization:
-    'Grid Localization using Odometry as the motion model and the colour sensor as the sensor model'
+    """Grid Localization using Odometry as the motion model and the colour sensor as the sensor model"""
     def __init__(self, states, alphas, odom, color_sensor, map, initial_probs=None):
         self.odom = odom
         self.color_sensor = color_sensor

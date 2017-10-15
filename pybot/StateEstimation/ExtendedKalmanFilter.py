@@ -1,6 +1,6 @@
 import numpy as np
 
-import KalmanFilter
+from StateEstimation.KalmanFilter import KalmanFilter
 
 
 class EKF1():
@@ -28,8 +28,7 @@ class EKF1():
         M = np.Matrix([[0.5*deltaT**2],[0.5*deltaT**2],[deltaT],[deltaT],[deltaT]])
         Q = M*M.T*0.01
 
-        return (A,B,u,Q)
-
+        return A, B, u, Q
 
     def proccessOdomData(self):
         (xbar, ybar, theta_bar, x_bar_prime, y_bar_prime, theta_bar_prime) = self.odom.update()
